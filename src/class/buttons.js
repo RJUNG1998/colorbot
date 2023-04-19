@@ -17,30 +17,6 @@ module.exports = class Button {
             .setLabel("이전");
     }
 
-    gameroomCreateButton() {
-        return new ButtonBuilder()
-            .setCustomId("gameroomcreate")
-            .setStyle(ButtonStyle.Primary)
-            .setDisabled(false)
-            .setLabel("생성하기")
-    }
-
-    gameroomJoinButton() {
-        return new ButtonBuilder()
-            .setCustomId("gameroomjoin")
-            .setStyle(ButtonStyle.Success)
-            .setDisabled(false)
-            .setLabel("참여")
-    }
-
-    gameroomThreadLeave() {
-        return new ButtonBuilder()
-            .setCustomId("gameroomleave")
-            .setStyle(ButtonStyle.Danger)
-            .setDisabled(false)
-            .setLabel("나가기")
-    }
-
     supportButton(id) {
         if (id === "supportreport") {
             return new ButtonBuilder()

@@ -156,34 +156,6 @@ module.exports = class Error {
             .setTimestamp();
     }
 
-    gameroomAdminChannel() {
-        return new EmbedBuilder()
-            .setTitle(`완료`)
-            .setThumbnail(`https://cdn-icons-png.flaticon.com/512/535/535786.png`)
-            .setDescription(`게임대기실 채널이 성공적으로 지정되었습니다.`)
-            .setColor("1BB7EA")
-            .setFooter({ text: `𓇼PALETTE𓇼`, iconURL: `https://cdn.discordapp.com/banners/937556248847581244/8487863eb9ed580eee9158f944d28fc0.webp?size=240`})
-    }
-
-    gameroomEmbed() {
-        return new EmbedBuilder()
-            .setTitle("게임 대기실")
-            .setDescription("현재 대기중인 게임이 없습니다...")
-            .setFooter({ text: `𓇼PALETTE𓇼`, iconURL: `https://cdn.discordapp.com/banners/937556248847581244/8487863eb9ed580eee9158f944d28fc0.webp?size=240`})
-    }
-
-    gameroomCreateWaitingEmbed(description, limit, owner) {
-        return new EmbedBuilder()
-            .setTitle(description)
-            .setDescription(`> 인원: ${limit}`)
-            .setFooter({ text: `방장: ${owner}` })
-    }
-    
-    gameroomThreadEmbed() {
-        return new EmbedBuilder()
-            .setDescription(`게임방을 나가시고 싶으시면 **나가기** 버튼을 눌러주십쇼.\n방장이 나가기 버튼을 누를시 게임방은 없어집니다.`)
-    }
-
     supportEmbed() {
         return new EmbedBuilder()
             .setColor(`Red`)
