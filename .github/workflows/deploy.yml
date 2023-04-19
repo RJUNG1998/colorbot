@@ -8,5 +8,12 @@ jobs:
   hello:
     runs-on: ubuntu-latest
     steps:
-    - name: Run a one-line script
-      run: echo Hello, World!
+    - name: SSH Remote Commands
+      uses: appleboy/ssh-action@v0.1.10
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+        script: whoami
+
+
