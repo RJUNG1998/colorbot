@@ -7,17 +7,17 @@ module.exports = {
         .setDescription('대나무 숲에 글을 적습니다'),
     async execute(interaction, client) {
         const modal = new ModalBuilder()
-            .setCustomId('postwritemodal')
+            .setCustomId('bamboowriteModal')
             .setTitle('대나무숲 글 적기')
         
         const titleinput = new TextInputBuilder()
-            .setCustomId('titleinput')
+            .setCustomId('writeTitleInput')
             .setLabel("글의 제목을 정해주세요")
             .setStyle(TextInputStyle.Short)
             .setRequired(true)
         
         const compartmentinput = new TextInputBuilder()
-            .setCustomId('compartmentinput')
+            .setCustomId('writeCompartmentInput')
             .setLabel("글의 내용을 적어주세요")
             .setStyle(TextInputStyle.Paragraph)
             .setRequired(true)

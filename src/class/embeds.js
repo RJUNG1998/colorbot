@@ -163,4 +163,9 @@ module.exports = class Error {
             .setDescription(`신고: **유저를 신고합니다**\n개선: **서버 개선을 제의합니다**\n상담: **1대1 상담 채널을 생성합니다** `)
             .setFooter({ text: `𓇼PALETTE𓇼`, iconURL: `https://cdn.discordapp.com/attachments/1013114492948840540/1095783759216922654/IMG_4037.png`})
     }
+
+    writeCommentEmbed() {
+        return new EmbedBuilder()
+            .setDescription("아래 버튼을 클릭하여 익명 댓글을 적어보세요!")
+    }
 }

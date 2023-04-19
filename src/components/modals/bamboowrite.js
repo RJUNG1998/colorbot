@@ -1,0 +1,38 @@
+const { SlashCommandBuilder, StringSelectMenuBuilder, EmbedBuilder, ActionRowBuilder, ChannelType } = require('discord.js');
+const fs = require('fs');
+const Embeds = require('../../class/embeds');
+const Buttons = require('../../class/buttons');
+
+module.exports = {
+    data: {
+        name: 'bamboowriteModal'
+    },
+
+    async execute(interaction, client) {
+
+        const buttons = new Buttons();
+
+        const writeAcceptButton = buttons.writeAcceptDenyButton('writeaccept')
+        const writeDenyButton = buttons.writeAcceptDenyButton('writedeny')
+
+        const row = new ActionRowBuilder().addComponents(writeAcceptButton, writeDenyButton)
+
+        const channelId = "1097982288198910073"
+        const writeDataTitle = interaction.fields.getTextInputValue('writeTitleInput')
+        const writeDataCompartment = interaction.fields.getTextInputValue('writeCompartmentInput')
+
+        client.writeTitleData = writeDataTitle
+        client.writeCompartmentData = writeDataCompartment
+
+        const embed = new EmbedBuilder()
+            .setColor("Blue")
+            .setTitle(`${writeDataTitle}`)
+            .setDescription(`${writeDataCompartment}`)
+            .setFooter({ text: `by ${interaction.member.nickname} | ${interaction.user.tag}` })
+        client.channels.cache.get(channelId).send({ embeds: [embed], components: [row] })
+        await interaction.reply({ embeds: [
+            new EmbedBuilder()
+                .setDescription("글이 검열 되고 있습니다...")], 
+            ephemeral: true})
+    }
+}

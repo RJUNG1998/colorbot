@@ -40,4 +40,25 @@ module.exports = class Button {
                 .setStyle(ButtonStyle.Danger)
         }
     }
+
+    writeAcceptDenyButton(id) {
+        if (id === 'writeaccept') {
+            return new ButtonBuilder()
+                .setCustomId('writeaccept')
+                .setLabel("승낙")
+                .setStyle(ButtonStyle.Success)
+        } else if (id === 'writedeny') {
+            return new ButtonBuilder()
+                .setCustomId('writedeny')
+                .setLabel('거절')
+                .setStyle(ButtonStyle.Danger)
+        }
+    }
+
+    writeCommentButton() {
+        return new ButtonBuilder()
+            .setCustomId('writeCommentButton')
+            .setLabel("댓글 작성")
+            .setStyle(ButtonStyle.Primary)
+    }
 }
