@@ -19,7 +19,6 @@ jobs:
           cd colorbot
           git pull
           npm i
-          pm2 stop colorbot
-          pm2 start colorbot
+          pm2 restart colorbot
 
 
