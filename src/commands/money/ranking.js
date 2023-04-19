@@ -41,7 +41,7 @@ module.exports = {
         rankingEmbed.addFields(fields.slice(0,10));
 
         const msg = await interaction.reply({ 
-            embeds: [rankingEmbed,test], components: [rowButton] });
+            embeds: [rankingEmbed], components: [rowButton] });
 
         const collector = msg.createMessageComponentCollector();
         collector.on('collect', async i => {
