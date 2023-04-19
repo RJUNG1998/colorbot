@@ -16,9 +16,9 @@ jobs:
         password: ${{ secrets.PASSWORD }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
-          cd colorbot
+          cd colorbot/
           git pull
           npm i
-          pm2 restart colorbot
+          sudo pm2 restart colorbot
 
 
