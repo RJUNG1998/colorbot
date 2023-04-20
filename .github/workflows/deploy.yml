@@ -19,4 +19,4 @@ jobs:
           cd colorbot/
           git pull
           npm install
-          pm2 start ecosystem.config.js --log-date-format 'DD-MM HH:mm:ss.SSS' --update-env
+          pm2 start ecosystem.config.js --env_production --log-date-format 'DD-MM HH:mm:ss.SSS' --update-env
