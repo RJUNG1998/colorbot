@@ -19,4 +19,4 @@ jobs:
           cd colorbot/
           git pull
           npm install
-          pm2 start src/bot.js --name colorbot
+          pm2 start src/bot.js --name colorbot --log-date-format 'DD-MM HH:mm:ss.SSS'
