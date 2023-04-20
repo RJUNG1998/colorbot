@@ -1,4 +1,4 @@
-const { ActionRowBuilder, Events, StringSelectMenuBuilder, SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const { ActionRowBuilder, Events, StringSelectMenuBuilder, SlashCommandBuilder, EmbedBuilder, PermissionFlagsBits } = require('discord.js');
 const fs = require('fs');
 const priceAdjust = require('../../class/priceAdjust');
 const Embeds = require('../../class/embeds');
@@ -6,6 +6,7 @@ const Embeds = require('../../class/embeds');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName("상점")
+        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .setDescription("(관리자용 명령어) 상점 관련 설정입니다.")
         .addSubcommand(option =>
             option.setName("품목추가")

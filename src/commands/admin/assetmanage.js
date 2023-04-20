@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
 const fs = require('fs');
 const priceAdjust = require('../../class/priceAdjust');
 const Embeds = require('../../class/embeds');
@@ -6,6 +6,7 @@ const Embeds = require('../../class/embeds');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName("자산관리")
+        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .setDescription("(관리자용 명령어) 지정한 유저의 돈을 수정합니다.")
         .addUserOption(option => 
             option.setName("대상")
