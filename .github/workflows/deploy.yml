@@ -15,14 +15,7 @@ jobs:
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
-        run: echo $USER
-        script:
-          whoami 
-          #echo $USER
-          # sudo pm2 stop colorbot
-          # cd colorbot/
-          # git pull
-          # npm i
-          # sudo pm2 start colorbot
+        script: |
+          echo $USER
 
 
