@@ -21,6 +21,8 @@ for (const folder of functionFolders) {
     }
 };
 
+console.log("Hello world!");
+
 client.handleEvents();
 client.handleCommands();
 client.handleComponents();
