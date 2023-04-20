@@ -20,6 +20,6 @@ jobs:
           cd colorbot/
           git pull
           npm i
-          sudo pm2 start colorbot
+          sudo pm2 start src/bot.js --name colorbot
 
 
