@@ -15,8 +15,10 @@ jobs:
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
-        script: 
-          echo $USER
+        run: echo $USER
+        script:
+          whoami 
+          #echo $USER
           # sudo pm2 stop colorbot
           # cd colorbot/
           # git pull
