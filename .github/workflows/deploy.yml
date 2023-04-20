@@ -15,10 +15,8 @@ jobs:
         username: ${{ secrets.USERNAME }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
+          pm2 stop colorbot
           cd colorbot/
           git pull
           npm install
-          npm run build
-          pm2 restart colorbot
-
-
+          pm2 start src/bot.js --name colorbot
