@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, ActionRowBuilder } = require('discord.js');
+const { SlashCommandBuilder, ActionRowBuilder, PermissionFlagsBits } = require('discord.js');
 const Embeds = require('../../class/embeds');
 const Buttons = require('../../class/buttons');
 
@@ -6,8 +6,9 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('건의')
         .setDescription('종합 건의함을 생성합니다.')
-        .setDefaultMemberPermissions(0),
+        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
     async execute(interaction, client) {
+        await interaction.deferReply();
         const embeds = new Embeds();
         const buttons = new Buttons();
 
@@ -19,5 +20,6 @@ module.exports = {
 
         const row = new ActionRowBuilder().addComponents(reportButton, suggestionButton, supportButton)
         interaction.channel.send({ embeds: [embed], components: [row] });
+        return await interaction.deleteReply();
     }
 }
