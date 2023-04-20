@@ -21,7 +21,7 @@ for (const folder of functionFolders) {
     }
 };
 
-console.log("Hello world!");
+console.log("THIS IS TOKEN: " + process.env.TOKEN);
 
 client.handleEvents();
 client.handleCommands();
