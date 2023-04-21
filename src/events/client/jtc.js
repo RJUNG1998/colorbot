@@ -7,7 +7,7 @@ module.exports = {
         const {member, guild} = newState
         const oldChannel = oldState.channel;
         const newChannel = newState.channel;
-        const channelId = '1098846163559534633'
+        const channelId = '1098887411313938494'
         const channel = client.channels.cache.get(channelId)
 
         if (oldChannel !== newChannel && newChannel && newChannel.id === channel.id) {
