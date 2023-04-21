@@ -1,43 +1,42 @@
-const { VoiceState } = require("discord.js")
+const { ChannelType, PermissionsBitField } = require("discord.js")
 
 module.exports = {
-    name: 'VoiceStateUpdate',
-    /**
-     * 
-     * @param {VoiceState} oldState
-     * @param {VoiceState} newState 
-     */
+    name: 'voiceStateUpdate',
     async execute(oldState, newState, client) {
         
-        const { member, guild } = newState
-        const oldChannel = oldState.channel
-        const newChannel = newState.channel
-        const JoinToCreate = "1098846163559534633"
+        const {member, guild} = newState
+        const oldChannel = oldState.channel;
+        const newChannel = newState.channel;
+        const channelId = '1098846163559534633'
+        const channel = client.channels.cache.get(channelId)
 
-        if (oldChannel !== newChannel && newChannel && newChannel.id === JoinToCreate) {
-            const voiceChannel = await guild.channels.create(member.user.tag, {
-                type: "GUILD_VOICE",
+        if (oldChannel !== newChannel && newChannel && newChannel.id === channel.id) {
+            const voiceChannel = await guild.channels.create({
+                name: `통화방`,
+                type: ChannelType.GuildVoice,
                 parent: newChannel.parent,
                 permissionOverwrites: [
                     {
                         id: member.id,
-                        allow: ["Connect"],
+                        allow: [PermissionsBitField.Flags.Connect, PermissionsBitField.Flags.ManageChannels],
                     },
                     {
                         id: guild.id,
-                        deny: ["Connect"],
-                    },
+                        allow: [PermissionsBitField.Flags.Connect],
+                    }
                 ]
             })
-
             client.voiceGenerator.set(member.id, voiceChannel.id)
-            await newChannel.permissionOverwrites.edit(member, {CONNECT: false})
-            setTimeout(() => member.voice.setChannel(voiceChannel), 500)
+            await newChannel.permissionOverwrites.edit(member, { Connect: false})
+            setTimeout(() => newChannel.permissionOverwrites.delete(member), 30 * 1000)
+
+            return setTimeout(() => member.voice.setChannel(voiceChannel), 500)
+
         }
 
         const ownedChannel = client.voiceGenerator.get(member.id)
 
-        if (ownedChannel && oldChannel.id === ownedChannel && (!newChannel || newChannel.id !== ownedChannel)) {
+        if (ownedChannel && oldChannel.id == ownedChannel && (!newChannel || newChannel.id !== ownedChannel)) {
             client.voiceGenerator.set(member.id, null)
             oldChannel.delete().catch(() => {})
         }
