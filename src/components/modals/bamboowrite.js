@@ -21,9 +21,6 @@ module.exports = {
         const writeDataTitle = interaction.fields.getTextInputValue('writeTitleInput')
         const writeDataCompartment = interaction.fields.getTextInputValue('writeCompartmentInput')
 
-        client.writeTitleData = writeDataTitle
-        client.writeCompartmentData = writeDataCompartment
-
         const embed = new EmbedBuilder()
             .setColor("Blue")
             .setTitle(`${writeDataTitle}`)

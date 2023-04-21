@@ -10,6 +10,6 @@ module.exports = {
             .setTitle(interaction.message.embeds[0].data.title)
             .setDescription(interaction.message.embeds[0].data.description)
             .setColor("Red");
-        return await interaction.update({ content: "검열이 완료되었습니다", embeds: [embed], components: [] });
+        return await interaction.update({ content: `<@&${interaction.user.id}>님이 검열 하였습니다`, embeds: [embed], components: [] });
     }       
 }
