@@ -28,7 +28,7 @@ module.exports = {
             .setColor("Blue")
             .setTitle(`${writeDataTitle}`)
             .setDescription(`${writeDataCompartment}`)
-        client.channels.cache.get(channelId).send({ embeds: [embed], components: [row] })
+        client.channels.cache.get(channelId).send({ content: `<@&937597272122884107> <@&937600283708629003>`, embeds: [embed], components: [row] })
         await interaction.reply({ embeds: [
             new EmbedBuilder()
                 .setDescription("글이 검열 되고 있습니다...")], 
