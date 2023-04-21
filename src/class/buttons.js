@@ -58,7 +58,7 @@ module.exports = class Button {
     writeCommentButton() {
         return new ButtonBuilder()
             .setCustomId('writeCommentButton')
-            .setLabel("댓글 작성")
+            .setLabel("익명 댓글 작성")
             .setStyle(ButtonStyle.Primary)
     }
 }

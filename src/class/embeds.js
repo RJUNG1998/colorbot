@@ -166,6 +166,13 @@ module.exports = class Error {
 
     writeCommentEmbed() {
         return new EmbedBuilder()
-            .setDescription("아래 버튼을 클릭하여 익명 댓글을 적어보세요!")
+            .setDescription("/익명댓글 로 익명으로 댓글 작성 가능합니다.")
+    }
+
+    writeCommentAnoEmbed(nickname, content) {
+        return new EmbedBuilder()
+            .setTimestamp()
+            .setFooter({ text: `by ${nickname}` })
+            .setDescription(content)
     }
 }

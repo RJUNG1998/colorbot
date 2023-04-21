@@ -11,8 +11,6 @@ module.exports = {
         const embeds = new Embeds();
         const buttons = new Buttons();
 
-        const embed = embeds.writeCommentEmbed()
-
         const writeCommentButton = buttons.writeCommentButton()
         const row = new ActionRowBuilder().addComponents(writeCommentButton)
 
@@ -23,7 +21,7 @@ module.exports = {
             type: ChannelType.GuildForum,
             message: { content: `${client.writeCompartmentData}` },
         })
-        await writeThread.send({ embeds: [embed], components: [row] })
+        await writeThread.send({ components: [row] })
 
         const existEmbed = new EmbedBuilder()
             .setTitle(interaction.message.embeds[0].data.title)
