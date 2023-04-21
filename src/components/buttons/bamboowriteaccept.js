@@ -25,7 +25,6 @@ module.exports = {
 
         const existEmbed = new EmbedBuilder()
             .setTitle(interaction.message.embeds[0].data.title)
-            .setFooter(interaction.message.embeds[0].data.footer)
             .setDescription(interaction.message.embeds[0].data.description)
             .setColor("Green");
 
