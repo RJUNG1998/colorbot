@@ -12,7 +12,7 @@ module.exports = {
 
         if (oldChannel !== newChannel && newChannel && newChannel.id === channel.id) {
             const voiceChannel = await guild.channels.create({
-                name: `통화방`,
+                name: `${member.nickname}의 채널`,
                 type: ChannelType.GuildVoice,
                 parent: newChannel.parent,
                 permissionOverwrites: [
