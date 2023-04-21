@@ -28,7 +28,6 @@ module.exports = {
             .setColor("Blue")
             .setTitle(`${writeDataTitle}`)
             .setDescription(`${writeDataCompartment}`)
-            .setFooter({ text: `by ${interaction.member.nickname} | ${interaction.user.tag}` })
         client.channels.cache.get(channelId).send({ embeds: [embed], components: [row] })
         await interaction.reply({ embeds: [
             new EmbedBuilder()
