@@ -7,7 +7,6 @@ module.exports = {
      * @param {VoiceState} oldState
      * @param {VoiceState} newState 
      */
-
     async execute(oldState, newState, client) {
         
         const { member, guild } = newState
@@ -20,8 +19,14 @@ module.exports = {
                 type: "GUILD_VOICE",
                 parent: newChannel.parent,
                 permissionOverwrites: [
-                    {id: member.id, allow: ["CONNECT"]},
-                    {id: guild.id, deny: ["CONNECT"]}
+                    {
+                        id: member.id,
+                        allow: ["Connect"],
+                    },
+                    {
+                        id: guild.id,
+                        deny: ["Connect"],
+                    },
                 ]
             })
 
