@@ -8,6 +8,8 @@ module.exports = {
     const joinChannelId = '1099655403580702760'; //🗣：기본 음성채널 생성 ID
     const joinChannelId2 = '1099653075150581802'; //🗣：내전 음성채널 생성 ID
     const joinChannelId3 = '1099656691332681738'; //🗣：공부 음성채널 생성 ID
+    const joinChannelId4 = '953753557499273286'; // 회의실 ID
+    const joinChannelId5 = '996186899360268348'; // 잠수방 ID
 
     //newState.member.nickname <- 본인의 닉네임 추출
     if (newState.channelId === joinChannelId) {
@@ -172,7 +174,7 @@ module.exports = {
         client.createdVoiceChannels.set(voiceChannel3.id, voiceChannel3);
       }
 
-    if (oldState.channelId && oldState.channel.members.size === 0 && oldState.channelId !== joinChannelId && oldState.channelId !== joinChannelId2 && oldState.channelId !== joinChannelId3) {
+    if (oldState.channelId && oldState.channel.members.size === 0 && oldState.channelId !== joinChannelId && oldState.channelId !== joinChannelId2 && oldState.channelId !== joinChannelId3 && oldState.channelId !== joinChannelId4 && oldState.channelId !== joinChannelId5) {
       const voiceChannel = await oldState.guild.channels.fetch(oldState.channelId).catch(console.error);
       if (voiceChannel && voiceChannel.members.size === 0 ) {
 
