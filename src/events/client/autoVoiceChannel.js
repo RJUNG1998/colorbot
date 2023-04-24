@@ -1,9 +1,12 @@
-const { PermissionsBitField, ChannelType } = require('discord.js');
+const { PermissionsBitField, ChannelType, EmbedBuilder } = require('discord.js');
 
 
 module.exports = {
   name: 'voiceStateUpdate',
   async execute(oldState, newState, client) {
+
+    const logChannelId = '1099666225472208947'
+    const logChannel = client.channels.cache.get(logChannelId)
 
     const joinChannelId = '1099655403580702760'; //🗣：기본 음성채널 생성 ID
     const joinChannelId2 = '1099653075150581802'; //🗣：내전 음성채널 생성 ID
@@ -62,7 +65,12 @@ module.exports = {
       });
 
       await newState.member.voice.setChannel(voiceChannel);
-
+      // await logChannel.send({ embeds: [
+      //     new EmbedBuilder()
+      //     .setColor("Green")
+      //     .setDescription(`<@${newState.member.id}>님이 <#${voiceChannel.id}>을 **생성**!`)
+      //     .setTimestamp()
+      // ]})
       client.createdVoiceChannels.set(voiceChannel.id, voiceChannel);
     }
 
