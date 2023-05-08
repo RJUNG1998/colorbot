@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
-const fs = require('fs');
+const User = require('../../schemas/user');
 const priceAdjust = require('../../class/priceAdjust');
 const Embeds = require('../../class/embeds');
 
@@ -26,38 +26,44 @@ module.exports = {
                 .setDescription("값을 입력해주세요.")
                 .setRequired(true)),
     
-    async execute(interaction) {
+    async execute(interaction, client) {
         const embeds = new Embeds();
         if (!interaction.member.permissions.has('ADMINISTRATOR')) return interaction.reply("권한이 없습니다.");
         const target = interaction.options.getUser('대상');
 
-        const userDataFilePath = `./data/user/${target.id}.json`;
-        let userData;
-        if (fs.existsSync(userDataFilePath)) {
-            userData = JSON.parse(fs.readFileSync(userDataFilePath, "utf-8"));
-        } else {
-            return interaction.reply({ embeds: [embeds.assetCheckError()] });
-        }
+        let storedUser = await client.fetchUser(target.id, interaction.guild.id);
         
         const amount = interaction.options.getInteger("값");
         const action = interaction.options.getString("동작");
-        const oldAmount = userData.money;
+        const oldAmount = storedUser.balance;
+
+        console.log(amount)
 
         switch (action) {
             case "edit":
-                userData.money = amount;
+                await User.findOneAndUpdate(
+                    { _id: storedUser._id },
+                    { balance: amount }
+                );
                 break;
             case "plus":
-                userData.money += amount;
+                await User.findOneAndUpdate(
+                    { _id: storedUser._id },
+                    { balance: storedUser.balance + amount }
+                );
                 break;
             case "minus":
-                userData.money -= amount;
+                await User.findOneAndUpdate(
+                    { _id: storedUser._id },
+                    { balance: storedUser.balance - amount }
+                );
                 break;
             default:
                 break;
         }
 
-        fs.writeFileSync(userDataFilePath, JSON.stringify(userData));
-        return interaction.reply({ embeds: [embeds.assetManageSuccess(userData.id, oldAmount, userData.money)] })
+        storedUser = await client.getUser(target.id, interaction.guild.id);
+
+        return await interaction.reply({ embeds: [embeds.assetManageSuccess(target.id, oldAmount, storedUser.balance)] })
     }
 }

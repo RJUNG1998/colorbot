@@ -11,36 +11,14 @@ module.exports = {
                 .setDescription('잔액을 확인할 유저를 지정해주세요. (지정하지 않으면 자신의 잔액을 확인합니다.)')
                 .setRequired(false)),
     
-    async execute(interaction) {
+    async execute(interaction, client) {
         const embeds = new Embeds();
         let target;
         !interaction.options.getUser('대상') ? target = interaction.user : target = interaction.options.getUser('대상');
-        const targetFilePath = `./data/user/${target.id}.json`;
         
-        let targetData, targetRank;
-        let userDatas = [];
+        const storedUser = await client.fetchUser(interaction.user.id, interaction.guild.id);
+        const storedUserRank = await client.getRank(target.id, interaction.guild.id);
+        return interaction.reply({ embeds: [embeds.assetCheckSuccess(storedUser.userId, storedUser.balance, storedUserRank.rank)] });
 
-        if (fs.existsSync(targetFilePath)) {
-            targetData = JSON.parse(fs.readFileSync(targetFilePath, "utf-8"));
-        } else {
-            return interaction.reply({ embeds: [embeds.assetCheckError()] });
-        }
-
-        const filePath = fs.readdirSync('./data/user').filter(file => file.endsWith('.json'));
-        for (const file of filePath) {
-            const data = JSON.parse(fs.readFileSync(`./data/user/${file}`, "utf-8"));
-            userDatas.push({ id: data.id, money: data.money });
-        }
-        userDatas.sort(function (a, b) {
-            return b.money - a.money;
-        });
-        for (var i = 0; i < userDatas.length; i++) {
-            if (userDatas[i].id === targetData.id) {
-                targetRank = i + 1;
-                break;
-            }
-        }
-
-        return interaction.reply({ embeds: [embeds.assetCheckSuccess(targetData.id, targetData.money, targetRank)] });
     }
 }

@@ -1,6 +1,7 @@
 const { SlashCommandBuilder } = require('discord.js');
 const fs = require('fs');
 const Embeds = require('../../class/embeds');
+const User = require('../../schemas/user');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -15,41 +16,25 @@ module.exports = {
                 .setDescription('송금할 금액을 입력해주세요.')
                 .setRequired(true)),
 
-    async execute(interaction) {
+    async execute(interaction, client) {
         const embeds = new Embeds();
-        const user = interaction.user;
         const target = interaction.options.getUser('대상');
         const amount = interaction.options.getInteger('금액');
 
-        const userFilePath = `./data/user/${user.id}.json`;
-        const targetFilePath = `./data/user/${target.id}.json`;
+        const storedUser = await client.fetchUser(interaction.user.id, interaction.guild.id);
+        const storedTargetUser = await client.fetchUser(target.id, interaction.guild.id);
 
-        let userData, targetData;
+        if (storedUser.balance >= amount) {
+            await User.findOneAndUpdate(
+                { _id: storedUser._id },
+                { balance: await storedUser.balance - amount }
+            );
+            await User.findOneAndUpdate(
+                { _id: storedTargetUser._id },
+                { balance: await storedTargetUser.balance + amount }
+            );
 
-        if (fs.existsSync(userFilePath)){
-            userData = JSON.parse(fs.readFileSync(userFilePath, "utf-8"));
-        } else {
-            return interaction.reply({embeds: [embeds.economyError()]});
-        }
-
-        if (fs.existsSync(targetFilePath)) {
-            targetData = JSON.parse(fs.readFileSync(targetFilePath, "utf-8"));
-        } else {
-            return interaction.reply({ embeds: [embeds.targetEconomyError()] });
-        }
-
-        if (userData.ongame || targetData.ongame) {
-            return interaction.reply({ embeds: [embeds.bothPlayerOnGame()] });
-        }
-
-        if (userData.money >= amount) {
-            userData.money -= amount;
-            targetData.money += amount;
-
-            fs.writeFileSync(userFilePath, JSON.stringify(userData));
-            fs.writeFileSync(targetFilePath, JSON.stringify(targetData));
-
-            return interaction.reply({ embeds: [embeds.sendMoneySuccess(targetData.id, amount)] });
+            return interaction.reply({ embeds: [embeds.sendMoneySuccess(storedTargetUser.userId, amount)] });
         } else {
             return interaction.reply({ embeds: [embeds.sendMoneyFail()] });
         }

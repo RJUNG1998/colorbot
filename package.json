@@ -15,6 +15,9 @@
     "discord-api-types": "^0.37.38",
     "discord.js": "^14.9.0",
     "dotenv": "^16.0.3",
+    "lol-tournament-code": "^1.0.1",
+    "mongodb": "^5.3.0",
+    "mongoose": "^7.1.0",
     "pm2": "^5.3.0"
   }
 }

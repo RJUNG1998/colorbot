@@ -1,40 +1,37 @@
 const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder } = require('discord.js');
 const fs = require('fs');
 const Embeds = require('../../class/embeds');
+const User = require('../../schemas/user');
 
-const PRICE = 50000;
+const PRICE = 1000;
 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName("출석체크")
         .setDescription('출석 체크를 하여 보상을 받습니다.'),
-    async execute(interaction) {
+    async execute(interaction, client) {
         const embeds = new Embeds();
-        const userDataFilePath = `./data/user/${interaction.user.id}.json`;
 
-        let userData;
+        const storedUser = await client.fetchUser(interaction.user.id, interaction.guild.id);
 
-        if (fs.existsSync(userDataFilePath)) {
-            userData = JSON.parse(fs.readFileSync(userDataFilePath, "utf-8"));
-        } else {
-            return interaction.reply({ 
-                embeds: [embeds.economyError()] });
+        if (!storedUser){
+            return interaction.reply({embeds: [embeds.economyError()]});
         }
 
         const today = new Date();
-        const date = "" + today.getFullYear() + (today.getMonth() + 1) + today.getDate();
-
-        if (userData.attendancecooldown === date) {
+        if ((storedUser.attendance.getDay() !== today.getDay()) || (storedUser.attendance.getMonth() !== today.getMonth()) || (storedUser.attendance.getYear() !== today.getYear())) {
+            await User.findOneAndUpdate(
+                { _id: storedUser._id },
+                { 
+                    balance: storedUser.balance + PRICE,
+                    attendance: today
+                },
+            );
+            return interaction.reply({ 
+                embeds: [embeds.attendanceSuccess(PRICE)] });
+        } else {
             return interaction.reply({ 
                 embeds: [embeds.attendanceError()] });
         }
-
-        userData.money = userData.money + PRICE;
-        userData.attendancecooldown = date;
-
-        fs.writeFileSync(userDataFilePath, JSON.stringify(userData));
-
-        return interaction.reply({ 
-            embeds: [embeds.attendanceSuccess(PRICE)] });
     }
 }
