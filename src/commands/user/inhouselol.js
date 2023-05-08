@@ -41,7 +41,7 @@ module.exports = {
     async execute(interaction, client) {
 
         const channelId = '1105053838047715379'
-
+        interaction.reply("hi")
         
     }
 }
