@@ -183,4 +183,12 @@ module.exports = class Error {
             .setDescription('`/내전` 명령어를 입력하여 사용 가능합니다.')
             .setFooter({ text: `𓇼PALETTE𓇼`, iconURL: `https://cdn.discordapp.com/attachments/1013114492948840540/1095783759216922654/IMG_4037.png`})
     }
+
+    inhouseEmbed() {
+        return new EmbedBuilder()
+            .setColor('Orange')
+            .setTitle("이용방법")
+            .setDescription('`/내전` 명령어를 입력하여 사용 가능합니다.')
+            .setFooter({ text: `𓇼PALETTE𓇼`, iconURL: `https://cdn.discordapp.com/attachments/1013114492948840540/1095783759216922654/IMG_4037.png`})
+    }
 }
