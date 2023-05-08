@@ -45,12 +45,15 @@ module.exports = {
         const lane = interaction.options.getString('라인')
 
         if (interaction.options.getSubcommand() === '롤등록') {
+            await channel.send("<@&1096143706068897862>")
             await channel.send({ embeds: [new EmbedBuilder().setColor('Yellow').setTitle("롤 내전 등록 요청").addFields({ name: '닉네임', value: `${nickname}` }).setFooter({ text: `${interaction.member.nickname} | ${interaction.member.tag}`})]})
             interaction.reply({ content: "등록중입니다... 잠시만 기다려주세요", ephemeral: true })
         } else if (interaction.options.getSubcommand() === '발로등록') {
+            await channel.send("<@&1096143706068897862>")
             await channel.send({ embeds: [new EmbedBuilder().setColor('Orange').setTitle("발로란트 내전 등록 요청").addFields({ name: '라이엇ID & 태그', value: `${tag}` }).setFooter({ text: `${interaction.member.nickname} | ${interaction.member.tag}`})]})
             interaction.reply({ content: "등록중입니다... 잠시만 기다려주세요", ephemeral: true })
         } else if (interaction.options.getSubcommand() === '라인추가') {
+            await channel.send("<@&1096143706068897862>")
             await channel.send({ embeds: [new EmbedBuilder().setColor('Blue').setTitle("롤 라인 추가 요청").addFields({ name: '유저 닉네임', value: `${interaction.member.nickname} | ${interaction.member.tag}`, inline: true }, { name: '희망 라인', value: `${lane}`, inline: true })]})
             interaction.reply({ content: "등록중입니다... 잠시만 기다려주세요", ephemeral: true })
         }
