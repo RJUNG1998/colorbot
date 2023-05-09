@@ -14,7 +14,7 @@ module.exports = {
 
         const embed = embeds.inhouseEmbed();
 
-        interaction.channel.send({ embeds: [embed] });
+        interaction.channel.send({ content: '<@&993627158138327151> <@&993626949471699067> <@&1097697913859223622>', embeds: [embed] });
 
         return await interaction.deleteReply();
     }
