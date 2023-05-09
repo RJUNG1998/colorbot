@@ -61,4 +61,19 @@ module.exports = class Button {
             .setLabel("익명 댓글 작성")
             .setStyle(ButtonStyle.Primary)
     }
+
+    inhouseRegisteredButton() {
+        return new ButtonBuilder()
+            .setCustomId('inhouseRegisteredButton')
+            .setLabel("수락")
+            .setStyle(ButtonStyle.Success)
+    }
+
+    inhouseDeniedButton() {
+        return new ButtonBuilder()
+            .setCustomId('inhouseDeniedButton')
+            .setLabel("거절")
+            .setStyle(ButtonStyle.Danger)
+    }
+
 }

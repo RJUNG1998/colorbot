@@ -1,4 +1,6 @@
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder } = require('discord.js');
+const Embeds = require('../../class/embeds');
+const Buttons = require('../../class/buttons');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -38,6 +40,11 @@ module.exports = {
 
     async execute(interaction, client) {
 
+        const buttons = new Buttons();
+        const registeredButton = buttons.inhouseRegisteredButton('inhouseRegisteredButton');
+        const deniedButton = buttons.inhouseDeniedButton('inhouseDeniedButton')
+        const row = new ActionRowBuilder().addComponents(registeredButton, deniedButton)
+
         const channel = client.channels.cache.get("1105053838047715379")
 
         const nickname = interaction.options.getString('닉네임')
@@ -45,17 +52,20 @@ module.exports = {
         const lane = interaction.options.getString('라인')
 
         if (interaction.options.getSubcommand() === '롤등록') {
+            client.inhouseuser = interaction.user
             await channel.send("<@&1096143706068897862>")
-            await channel.send({ embeds: [new EmbedBuilder().setColor('Yellow').setTitle("롤 내전 등록 요청").addFields({ name: '닉네임', value: `${nickname}` }).setFooter({ text: `${interaction.member.nickname} | ${interaction.user.tag}`})]})
-            interaction.reply({ content: "등록중입니다... 잠시만 기다려주세요", ephemeral: true })
+            await channel.send({ embeds: [new EmbedBuilder().setColor('Yellow').setTitle("롤 내전 등록 요청").addFields({ name: '닉네임', value: `${nickname}` }).setFooter({ text: `${interaction.member.nickname} | ${interaction.user.tag}`})], components: [row]})
+            interaction.reply({ embeds: [new EmbedBuilder().setDescription("해당 요청이 정상적으로 접수되었습니다.\n이 작업은 최소 몇 분에서 최대 몇 시간까지 시간이 소요될 수 있습니다.")], ephemeral: true })
         } else if (interaction.options.getSubcommand() === '발로등록') {
+            client.inhouseuser = interaction.user
             await channel.send("<@&1096143706068897862>")
-            await channel.send({ embeds: [new EmbedBuilder().setColor('Orange').setTitle("발로란트 내전 등록 요청").addFields({ name: '라이엇ID & 태그', value: `${tag}` }).setFooter({ text: `${interaction.member.nickname} | ${interaction.user.tag}`})]})
-            interaction.reply({ content: "등록중입니다... 잠시만 기다려주세요", ephemeral: true })
+            await channel.send({ embeds: [new EmbedBuilder().setColor('Orange').setTitle("발로란트 내전 등록 요청").addFields({ name: '라이엇ID & 태그', value: `${tag}` }).setFooter({ text: `${interaction.member.nickname} | ${interaction.user.tag}`})], components: [row]})
+            interaction.reply({ embeds: [new EmbedBuilder().setDescription("해당 요청이 정상적으로 접수되었습니다.\n이 작업은 최소 몇 분에서 최대 몇 시간까지 시간이 소요될 수 있습니다.")], ephemeral: true })
         } else if (interaction.options.getSubcommand() === '라인추가') {
+            client.inhouseuser = interaction.user
             await channel.send("<@&1096143706068897862>")
-            await channel.send({ embeds: [new EmbedBuilder().setColor('Blue').setTitle("롤 라인 추가 요청").addFields({ name: '유저 닉네임', value: `${interaction.member.nickname} | ${interaction.user.tag}`, inline: true }, { name: '희망 라인', value: `${lane}`, inline: true })]})
-            interaction.reply({ content: "등록중입니다... 잠시만 기다려주세요", ephemeral: true })
+            await channel.send({ embeds: [new EmbedBuilder().setColor('Blue').setTitle("롤 라인 추가 요청").addFields({ name: '유저 닉네임', value: `${interaction.member.nickname} | ${interaction.user.tag}`, inline: true }, { name: '희망 라인', value: `${lane}`, inline: true })], components: [row]})
+            interaction.reply({ embeds: [new EmbedBuilder().setDescription("해당 요청이 정상적으로 접수되었습니다.\n이 작업은 최소 몇 분에서 최대 몇 시간까지 시간이 소요될 수 있습니다.")], ephemeral: true })
         }
     }
 }

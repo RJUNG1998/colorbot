@@ -11,6 +11,7 @@ client.modals = new Collection();
 client.createdVoiceChannels = new Collection(); // autoVoiceChannel.js 전용
 client.logTotalTime = new Collection();
 client.commandArray = [];
+client.inhouseUser = new Collection()
 
 //핸들러
 const functionFolders = fs.readdirSync(`./src/functions`);
