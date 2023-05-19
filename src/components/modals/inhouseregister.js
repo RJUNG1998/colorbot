@@ -32,7 +32,7 @@ module.exports = {
         const row2 = new ActionRowBuilder().addComponents(subTop,subJgl,subMid,subAdc,subSup)
         const row3 = new ActionRowBuilder().addComponents(complete, reject)
 
-        const channelId = '1108272461537099868'
+        const channelId = '1108928861351182426'
         const dataDesire = interaction.fields.getTextInputValue('desireInput')
         const dataTag = interaction.fields.getTextInputValue('tagInput')
         const dataIgn = interaction.fields.getTextInputValue('ignInput')

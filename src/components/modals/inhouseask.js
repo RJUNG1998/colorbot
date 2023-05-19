@@ -15,7 +15,7 @@ module.exports = {
 
         const row = new ActionRowBuilder().addComponents(answer)
 
-        const channelId = '1108272461537099868'
+        const channelId = '1108928861351182426'
         const userId = interaction.user.id 
 
         const dataAskName = interaction.fields.getTextInputValue('inhouseAskNameInput')
