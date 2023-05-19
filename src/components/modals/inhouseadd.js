@@ -28,7 +28,7 @@ module.exports = {
         const dataLane = interaction.fields.getTextInputValue('laneInput')
         const dataOpgg = interaction.fields.getTextInputValue('opggInput')
 
-        client.channels.cache.get(channelId).send({ embeds: [
+        const message = await client.channels.cache.get(channelId).send({ embeds: [
             new EmbedBuilder()
                 .setColor('Yellow')
                 .setTitle('라인 추가 요청')
@@ -55,7 +55,7 @@ module.exports = {
         ])
 
         const guild = client.guilds.cache.get('937556248847581244')
-        const collector = interaction.channel.createMessageComponentCollector({ componentType: ComponentType.Button })
+        const collector = message.createMessageComponentCollector()
         collector.on('collect', async x => {
             if (subRoleMap.has(x.customId)) {
                 const role = subRoleMap.get(x.customId)

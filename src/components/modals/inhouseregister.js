@@ -39,7 +39,7 @@ module.exports = {
 
         const userId = interaction.user.id
 
-        client.channels.cache.get(channelId).send({ embeds: [
+        const message = await client.channels.cache.get(channelId).send({ embeds: [
             new EmbedBuilder()
                 .setColor('Green')
                 .setTitle('등록 요청')
@@ -77,7 +77,7 @@ module.exports = {
         ]);
 
         const guild = client.guilds.cache.get('937556248847581244')
-        const collector = interaction.channel.createMessageComponentCollector({ componentType: ComponentType.Button })
+        const collector = message.createMessageComponentCollector()
         collector.on('collect', async i => {
             if (roleMap.has(i.customId)) {
                 const role = roleMap.get(i.customId)
