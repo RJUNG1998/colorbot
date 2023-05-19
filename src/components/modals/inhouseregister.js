@@ -32,14 +32,14 @@ module.exports = {
         const row2 = new ActionRowBuilder().addComponents(subTop,subJgl,subMid,subAdc,subSup)
         const row3 = new ActionRowBuilder().addComponents(complete, reject)
 
-        const channelId = '1108947287448768592'
+        const channelId = '1108950964045627392'
         const dataDesire = interaction.fields.getTextInputValue('desireInput')
         const dataTag = interaction.fields.getTextInputValue('tagInput')
         const dataIgn = interaction.fields.getTextInputValue('ignInput')
 
         const userId = interaction.user.id
 
-        client.channels.cache.get(channelId).send({ embeds: [
+        const message = await client.channels.cache.get(channelId).send({ embeds: [
             new EmbedBuilder()
                 .setColor('Green')
                 .setTitle('등록 요청')
@@ -77,7 +77,7 @@ module.exports = {
         ]);
 
         const guild = client.guilds.cache.get('937556248847581244')
-        const collector = interaction.channel.createMessageComponentCollector({ componentType: ComponentType.Button })
+        const collector = message.createMessageComponentCollector({ componentType: ComponentType.Button })
         collector.on('collect', async i => {
             if (roleMap.has(i.customId)) {
                 const role = roleMap.get(i.customId)
