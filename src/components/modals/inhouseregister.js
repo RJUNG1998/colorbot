@@ -90,10 +90,10 @@ module.exports = {
                 }
             } else if (i.customId === 'inhouseFinish') {
                 await client.users.cache.get(userId).send({ embeds: [new EmbedBuilder().setColor('Green').setTitle('수락').setDescription('정상적으로 등록이 완료되었습니다!')] })
-                i.update({ content: `<@${i.user.id}>님이 승낙!`, components: [] })
+                i.update({ content: `<@${i.user.id}>님이 승낙.`, components: [] })
             } else if (i.customId === 'inhouseReject') {
                 await client.users.cache.get(userId).send({ embeds: [new EmbedBuilder().setColor('Red').setTitle('거부').setDescription('opgg 링크를 다시 확인해 주세요.')] })
-                i.update({ content: `<@${i.user.id}>님이 거부!`, components: [] })
+                i.update({ content: `<@${i.user.id}>님이 거부.`, components: [] })
             }
         })
     }
