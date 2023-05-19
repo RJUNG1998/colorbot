@@ -62,6 +62,63 @@ module.exports = class Button {
             .setStyle(ButtonStyle.Primary)
     }
 
+    inhouseButton(id) {
+        if (id === 'inhouseRegister') {
+            return new ButtonBuilder()
+                .setCustomId('inhouseRegister')
+                .setLabel(`내전등록`)
+                .setEmoji('1107956619528122398')
+                .setStyle(ButtonStyle.Success)
+        } else if (id === 'inhouseAdd') {
+            return new ButtonBuilder()
+                .setCustomId('inhouseAdd')
+                .setLabel(`라인요청`)
+                .setEmoji('1107957594439565363')
+                .setStyle(ButtonStyle.Primary) 
+        } else if (id === 'inhouseAsk') {
+            return new ButtonBuilder()
+                .setCustomId('inhouseAsk')
+                .setLabel(`질문하기`)
+                .setEmoji('1108004156813344889')
+                .setStyle(ButtonStyle.Secondary)
+        } else if (id === 'inhouseLink') {
+            return new ButtonBuilder()
+                .setLabel(`op.gg 바로가기`)
+                .setURL('https://www.op.gg/')
+                .setStyle(ButtonStyle.Link)
+        } else if (id === 'inhouseRift') {
+            return new ButtonBuilder()
+                .setCustomId('inhouseRift')
+                .setLabel(`협곡`)
+                .setStyle(ButtonStyle.Success)
+        } else if (id === 'inhouseAram') {
+            return new ButtonBuilder()
+                .setCustomId('inhouseAram')
+                .setLabel(`칼바람`)
+                .setStyle(ButtonStyle.Success)
+        } else if (id === 'inhouseValorant') {
+            return new ButtonBuilder()
+                .setCustomId('inhouseValorant')
+                .setLabel(`발로란트`)
+                .setStyle(ButtonStyle.Success)
+        } else if (id === 'inhouseAnswer') {
+            return new ButtonBuilder()
+                .setCustomId('inhouseAnswer')
+                .setLabel(`답변하기`)
+                .setStyle(ButtonStyle.Primary)
+        } else if (id === 'inhouseFinish') {
+            return new ButtonBuilder()
+                .setCustomId('inhouseFinish')
+                .setLabel(`완료`)
+                .setStyle(ButtonStyle.Success)
+        } else if (id === 'inhouseReject') {
+            return new ButtonBuilder()
+                .setCustomId('inhouseReject')
+                .setLabel(`거부`)
+                .setStyle(ButtonStyle.Danger)
+        }
+    }
+
     inhouseLane(id) {
         if (id === 'inhouseTop') {
             return new ButtonBuilder()
