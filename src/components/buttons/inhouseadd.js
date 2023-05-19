@@ -21,7 +21,16 @@ module.exports = {
         const firstActionRow = new ActionRowBuilder().addComponents(laneInput)
         const secondActionRow = new ActionRowBuilder().addComponents(opggInput)
 
-        inhouseAddModal.addComponents(firstActionRow, secondActionRow)
-        return interaction.showModal(inhouseAddModal)
+        const guild = client.guilds.cache.get('937556248847581244')
+        const userId = interaction.user.id
+
+        const riftRole = guild.members.cache.get(userId).roles.cache.has('993627158138327151')
+
+        if (riftRole) {
+            inhouseAddModal.addComponents(firstActionRow, secondActionRow)
+            return interaction.showModal(inhouseAddModal)
+        } else {
+            interaction.reply({ embeds: [new EmbedBuilder().setDescription("<@&993627158138327151> 역할을 보유하고 있지 않아요!\n 협곡 등록을 먼저 해주세요!")], ephemeral: true })
+        }
     }
 }
