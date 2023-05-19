@@ -62,18 +62,57 @@ module.exports = class Button {
             .setStyle(ButtonStyle.Primary)
     }
 
-    inhouseRegisteredButton() {
-        return new ButtonBuilder()
-            .setCustomId('inhouseRegisteredButton')
-            .setLabel("수락")
-            .setStyle(ButtonStyle.Success)
+    inhouseLane(id) {
+        if (id === 'inhouseTop') {
+            return new ButtonBuilder()
+                .setCustomId('inhouseTop')
+                .setLabel(`탑`)
+                .setStyle(ButtonStyle.Primary)
+        } else if (id === 'inhouseJgl') {
+            return new ButtonBuilder()
+                .setCustomId('inhouseJgl')
+                .setLabel(`정글`)
+                .setStyle(ButtonStyle.Primary)
+        } else if (id === 'inhouseMid') {
+            return new ButtonBuilder()
+                .setCustomId('inhouseMid')
+                .setLabel(`미드`)
+                .setStyle(ButtonStyle.Primary)
+        } else if (id === 'inhouseAdc') {
+            return new ButtonBuilder()
+                .setCustomId('inhouseAdc')
+                .setLabel(`원딜`)
+                .setStyle(ButtonStyle.Primary)
+        } else if (id === 'inhouseSup') {
+            return new ButtonBuilder()
+                .setCustomId('inhouseSup')
+                .setLabel(`서폿`)
+                .setStyle(ButtonStyle.Primary)
+        } else if (id === 'inhouseSubTop') {
+            return new ButtonBuilder()
+                .setCustomId('inhouseSubTop')
+                .setLabel(`서브 탑`)
+                .setStyle(ButtonStyle.Secondary)
+        } else if (id === 'inhouseSubJgl') {
+            return new ButtonBuilder()
+                .setCustomId('inhouseSubJgl')
+                .setLabel(`서브 정글`)
+                .setStyle(ButtonStyle.Secondary)
+        } else if (id === 'inhouseSubMid') {
+            return new ButtonBuilder()
+                .setCustomId('inhouseSubMid')
+                .setLabel(`서브 미드`)
+                .setStyle(ButtonStyle.Secondary)
+        } else if (id === 'inhouseSubAdc') {
+            return new ButtonBuilder()
+                .setCustomId('inhouseSubAdc')
+                .setLabel(`서브 원딜`)
+                .setStyle(ButtonStyle.Secondary)
+        } else if (id === 'inhouseSubSup') {
+            return new ButtonBuilder()
+                .setCustomId('inhouseSubSup')
+                .setLabel(`서브 서폿`)
+                .setStyle(ButtonStyle.Secondary)
+        }
     }
-
-    inhouseDeniedButton() {
-        return new ButtonBuilder()
-            .setCustomId('inhouseDeniedButton')
-            .setLabel("거절")
-            .setStyle(ButtonStyle.Danger)
-    }
-
 }

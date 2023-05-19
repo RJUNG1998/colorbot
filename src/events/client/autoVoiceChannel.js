@@ -17,7 +17,7 @@ module.exports = {
     //newState.member.nickname <- 본인의 닉네임 추출
     if (newState.channelId === joinChannelId) {
       const voiceChannel = await newState.guild.channels.create({
-        name: `${newState.member.nickname}의 채널`,
+        name: `방제 변경 필수`,
         type: ChannelType.GuildVoice,
         parent: newState.channel.parentId,
         permissionOverwrites: [
