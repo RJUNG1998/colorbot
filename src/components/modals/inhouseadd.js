@@ -23,7 +23,7 @@ module.exports = {
         const row1 = new ActionRowBuilder().addComponents(complete, reject)
 
         const userId = interaction.user.id
-        const channelId = '1108928861351182426'
+        const channelId = '1108947287448768592'
         
         const dataLane = interaction.fields.getTextInputValue('laneInput')
         const dataOpgg = interaction.fields.getTextInputValue('opggInput')
