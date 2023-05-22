@@ -28,6 +28,6 @@ module.exports = {
             .setDescription(interaction.message.embeds[0].data.description)
             .setColor("Green");
 
-        return await interaction.update({ content: `<@&${interaction.user.id}>님이 검열 하였습니다`, embeds: [existEmbed], components: [] });
+        return await interaction.update({ content: `<@${interaction.user.id}>님이 검열 하였습니다`, embeds: [existEmbed], components: [] });
     }       
 }
