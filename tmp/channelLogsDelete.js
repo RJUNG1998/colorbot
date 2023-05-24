@@ -3,7 +3,7 @@ const { EmbedBuilder } = require("discord.js");
 module.exports = {
     name: 'channelDelete',
     async execute(channel, client) {
-        const logChannelId = '1099666225472208947'
+        const logChannelId = '938210526994006076'
         const logChannel = client.channels.cache.get(logChannelId)
 
         console.log(client.createdVoiceChannels);
