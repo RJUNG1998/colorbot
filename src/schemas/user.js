@@ -9,6 +9,10 @@ const userSchema = new Schema({
         id: {type: String, default: ""},
         summonerName: {type: String, default: ""}
     },
+    cooldown: {
+        chat: { type: Date, default: new Date("01/01/2000 00:00") },
+        voice: { type: Date, default: new Date("01/01/2000 00:00") }
+    }
 });
 
 module.exports = model("User", userSchema, "users");
