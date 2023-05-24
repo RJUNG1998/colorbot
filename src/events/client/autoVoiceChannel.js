@@ -71,7 +71,7 @@ module.exports = {
       //     .setDescription(`<@${newState.member.id}>님이 <#${voiceChannel.id}>을 **생성**!`)
       //     .setTimestamp()
       // ]})
-      client.createdVoiceChannels.set(voiceChannel.id, voiceChannel);
+      // client.createdVoiceChannels.set(voiceChannel.id, voiceChannel);
     }
 
     if (newState.channelId === joinChannelId2) {
@@ -125,7 +125,7 @@ module.exports = {
   
         await newState.member.voice.setChannel(voiceChannel2);
   
-        client.createdVoiceChannels.set(voiceChannel2.id, voiceChannel2);
+        // client.createdVoiceChannels.set(voiceChannel2.id, voiceChannel2);
       }
 
       if (newState.channelId === joinChannelId3) {
@@ -179,7 +179,7 @@ module.exports = {
   
         await newState.member.voice.setChannel(voiceChannel3);
   
-        client.createdVoiceChannels.set(voiceChannel3.id, voiceChannel3);
+        // client.createdVoiceChannels.set(voiceChannel3.id, voiceChannel3);
       }
 
     if (oldState.channelId && oldState.channel.members.size === 0 && oldState.channelId !== joinChannelId && oldState.channelId !== joinChannelId2 && oldState.channelId !== joinChannelId3 && oldState.channelId !== joinChannelId4 && oldState.channelId !== joinChannelId5) {
@@ -188,7 +188,7 @@ module.exports = {
 
         await voiceChannel.delete().catch(console.error);
 
-        client.createdVoiceChannels.delete(voiceChannel.id);
+        // client.createdVoiceChannels.delete(voiceChannel.id);
       }
     }
   }

@@ -1,48 +1,21 @@
 const { EmbedBuilder } = require("discord.js");
+const logChannelId = '938210526994006076'
 
 module.exports = {
     name: 'channelDelete',
     async execute(channel, client) {
-        const logChannelId = '938210526994006076'
         const logChannel = client.channels.cache.get(logChannelId)
 
-        console.log(client.createdVoiceChannels);
-        if (client.createdVoiceChannels.findKey(i=> i.id === channel.id)) {
+        if (client.createdVoiceChannels.get(String(channel.id))) {
             if (channel.type === 2) {
                 logChannel.send({ embeds: [
                     new EmbedBuilder()
-                        .setColor("Red")
-                        .setDescription(`**${client.createdVoiceChannels.get(channel.id).name}** 채널이 **삭제**!`)
+                        .setColor('Grey')
+                        .setDescription(`***[${client.createdVoiceChannels.get(String(channel.id)).channelNameHistory.pop()}]*** 채널이 **삭제**!`)
                         .setTimestamp()
                 ]})
+                client.createdVoiceChannels.delete(channel.id)
             }
-        }
-        // if (client.createdVoiceChannels.findKey(i => {
-        //     console.log(i.id)
-        // })) {
-            // if (channel.type === 2) {
-            //     client.createdVoice.indexOf(channel.id);
-
-            //     logChannel.send(`${channel.name} 이 없어짐.`)
-            // }
-        // }
-    }
-}
-
-module.exports = {
-    name: 'channelUpdate',
-    async execute(oldChannel, newChannel, client) {
-        const logChannelId = '938210526994006076'
-        const logChannel = client.channels.cache.get(logChannelId)
-        
-        // Voice Channel
-        if (client.channels.cache.get(newChannel.id).type === 2) {
-            logChannel.send({ embeds: [
-                new EmbedBuilder()
-                .setColor("Blue")
-                .setDescription(`**${oldChannel.name}** 채널이 <#${newChannel.id}> 으로 채널명 **변경**!`)
-                .setTimestamp()
-            ]})
         }
     }
 }
