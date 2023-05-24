@@ -11,6 +11,21 @@ client.modals = new Collection();
 // client.createdVoiceChannels = new Collection(); // autoVoiceChannel.js 전용
 client.logTotalTime = new Collection();
 client.commandArray = [];
+client.expTable = new Collection();
+
+//경험치 테이블 셋업
+/** 
+ * Colletion = { 
+ *      level => [XP needed to level up, Total xp required]
+ * }
+ * */
+let totalExp = 0
+for (let i = 0; i < 101; i++) {
+    let exp = 5 * (Math.pow(i, 2)) + (50 * i) + 100
+    client.expTable.set(i, [exp, totalExp])
+    totalExp += exp
+}
+
 
 //핸들러
 const functionFolders = fs.readdirSync(`./src/functions`);
