@@ -8,7 +8,7 @@ client.commands = new Collection();
 client.selectMenus = new Collection();
 client.buttons = new Collection();
 client.modals = new Collection();
-client.createdVoiceChannels = new Collection(); // autoVoiceChannel.js 전용
+// client.createdVoiceChannels = new Collection(); // autoVoiceChannel.js 전용
 client.logTotalTime = new Collection();
 client.commandArray = [];
 

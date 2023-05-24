@@ -14,7 +14,7 @@ module.exports = {
                         .setDescription(`***[${client.createdVoiceChannels.get(String(channel.id)).channelNameHistory.pop()}]*** 채널이 **삭제**!`)
                         .setTimestamp()
                 ]})
-                client.createdVoiceChannels.delete(channel.id)
+                // client.createdVoiceChannels.delete(channel.id)
             }
         }
     }

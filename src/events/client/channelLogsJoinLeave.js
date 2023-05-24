@@ -57,7 +57,7 @@ module.exports = {
                     .setDescription(`<@${newState.member.id}>님이 ***[${newState.channel.name}]*** 채널을 **__생성__**!`)
                     .setTimestamp()
                 ]})
-                client.createdVoiceChannels.set(newState.channel.id, {'channelNameHistory': [newState.channel.name] })
+                // client.createdVoiceChannels.set(newState.channel.id, {'channelNameHistory': [newState.channel.name] })
                 client.logTotalTime.set(`${guildId}-${userId}`, Date.now())
         }
 
