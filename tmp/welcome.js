@@ -37,4 +37,4 @@ client.on('guildMemberAdd', member => {
     
     }),
 
-client.login('MTExMDI3Nzg1OTAwMTUxMjAwOA.GrFuHO.JbIyn7aTVo43AG-svTBUNEk0K-Mi8m3sN5-duQ');
+client.login('bot-token');
