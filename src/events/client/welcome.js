@@ -3,8 +3,18 @@ module.exports = {
     async execute(member) {
         let welcomeRole = member.guild.roles.cache.find(role => role.name === '🚩승인필요');
         let welcomeRole2 = member.guild.roles.cache.find(role => role.name === '------------------<  소개  >------------------');
+        let welcomeRole3 = member.guild.roles.cache.find(role => role.name === '------------------<  게임  >------------------');
+        let welcomeRole4 = member.guild.roles.cache.find(role => role.name === '------------------<  내전  >------------------');
+        let welcomeRole5 = member.guild.roles.cache.find(role => role.name === '------------------<  취미  >------------------');
+        let welcomeRole6 = member.guild.roles.cache.find(role => role.name === '------------------<  경고  >------------------');
+
+        
         member.roles.add(welcomeRole)
         member.roles.add(welcomeRole2)
+        member.roles.add(welcomeRole3)
+        member.roles.add(welcomeRole4)
+        member.roles.add(welcomeRole5)
+        member.roles.add(welcomeRole6)
     
         const embed = {
             title: '🖌️ PALETTE 🎨\n\n- 승인 절차 -',
