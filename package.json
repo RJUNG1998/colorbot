@@ -11,6 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "@discordjs/rest": "^1.7.0",
+    "@napi-rs/canvas": "^0.1.41",
+    "aws-sdk": "^2.1384.0",
     "chalk": "^4.1.2",
     "discord-api-types": "^0.37.38",
     "discord.js": "^14.9.0",
@@ -18,7 +20,12 @@
     "lol-tournament-code": "^1.0.1",
     "mongodb": "^5.3.0",
     "mongoose": "^7.1.0",
+<<<<<<< HEAD
     "node-schedule": "^2.1.1",
     "pm2": "^5.3.0"
+=======
+    "pm2": "^5.3.0",
+    "uuid": "^9.0.0"
+>>>>>>> 3d743e98a286454d5785f64d096f0301f06536f9
   }
 }
