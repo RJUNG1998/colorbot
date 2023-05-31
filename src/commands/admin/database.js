@@ -2,6 +2,7 @@ const Guild = require('../../schemas/guild');
 const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
 const mongoose = require('mongoose');
 
+
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('데이터베이스')
