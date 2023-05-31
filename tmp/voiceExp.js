@@ -26,7 +26,7 @@ module.exports = {
                 )
             }, 300000)
             XPIntervals[userId] = setInterval(async () => {
-                const storedUser = await client.fetchUser(
+                let storedUser = await client.fetchUser(
                     newState.id,
                     newState.guild.id
                 );
@@ -41,11 +41,15 @@ module.exports = {
                         }
                     )
                 }
+                storedUser = await client.fetchUser(
+                    newState.id,
+                    newState.guild.id
+                );
                 await User.findOneAndUpdate(
                     { _id: storedUser._id },
                     {
-                        'exp.voice': storedUser.exp.voice + 1,
-                        'exp.voiceTotal': storedUser.exp.voiceTotal + 1
+                        'exp.voice': storedUser.exp.voice + 2,
+                        'exp.voiceTotal': storedUser.exp.voiceTotal + 2
                     }
                 )
             }, 60000)

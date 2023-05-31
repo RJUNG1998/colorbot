@@ -20,6 +20,12 @@ const userSchema = new Schema({
         voiceTotal: { type: Number, default: 0 },
         chatLevel: { type: Number, default: 0 },
         voiceLevel: { type: Number, default: 0 }
+    },
+    guildName: { type: String, default: null },
+    profileSource: {
+        background: { type: String, default: 'default_background' },
+        achievement: { type: String, default: '자라는 새싹' },
+        border: { type: String, default: null },
     }
 
 

@@ -55,7 +55,7 @@ module.exports = {
                     {
                         'exp.chatLevel': await storedUser.exp.chatLevel + 1,
                         'exp.chat': 0,
-                        // balance: await storedUser.balance + client.expTable.get(storedUser.exp.voiceLevel)[0]
+                        balance: await storedUser.balance + client.expTable.get(storedUser.exp.voiceLevel)[0]
                     }
                 )
             }
@@ -63,7 +63,7 @@ module.exports = {
                 { _id: storedUser._id },
                 { 
                     'cooldown.chat': today,
-                    // balance: await storedUser.balance + AMOUNT,
+                    balance: await storedUser.balance + AMOUNT,
                     'exp.chat': await storedUser.exp.chat + 1,
                     'exp.chatTotal': await storedUser.exp.chatTotal + 1
                 }
