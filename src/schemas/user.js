@@ -19,11 +19,15 @@ const userSchema = new Schema({
         chatTotal: { type: Number, default: 0 },
         voiceTotal: { type: Number, default: 0 },
         chatLevel: { type: Number, default: 0 },
-        voiceLevel: { type: Number, default: 0 }
+        voiceLevel: { type: Number, default: 0 },
+        role: { type: String, default: "gray" }
     },
     guildName: { type: String, default: null },
     profileSource: {
-        background: { type: String, default: 'default_background' },
+        background: { type: String, default: 'background_gray' },
+        backgroundInventory: [String],
+        profileBorder: { type: String, default: 'profile_border_gray' },
+        profileNameBar: { type: String, default: 'profile_name_bar_gray' },
         achievement: { type: String, default: '자라는 새싹' },
         border: { type: String, default: null },
     }

@@ -33,6 +33,11 @@ module.exports = {
             target.id,
             interaction.guild.id
         );
+
+        const storedGuild = await client.getGuild(
+            storedUser.guildName
+        );
+
         Canvas.GlobalFonts.registerFromPath(join(__dirname, '..', '..', 'assets', 'fonts', 'CookieRun_Regular.ttf'), 'CookieRun')
         const canvas = Canvas.createCanvas(500, 188);
         const context = canvas.getContext('2d');
@@ -41,9 +46,9 @@ module.exports = {
         .promise();
         const coinData = await s3.getObject({Bucket: 'colorbot', Key: 'colorbot_rank/coin/coin.png'})
         .promise();
-        const profileborderData = await s3.getObject({Bucket: 'colorbot', Key: 'colorbot_rank/profileborder/profile_border_red.png'})
+        const profileborderData = await s3.getObject({Bucket: 'colorbot', Key: `colorbot_rank/profileborder/${storedUser.profileSource.profileBorder}.png`})
         .promise();
-        const profileNameBarData = await s3.getObject({Bucket: 'colorbot', Key: 'colorbot_rank/profilenamebar/profile_name_bar_red.png'})
+        const profileNameBarData = await s3.getObject({Bucket: 'colorbot', Key: `colorbot_rank/profilenamebar/${storedUser.profileSource.profileNameBar}.png`})
         .promise();
         if (storedUser.profileSource.border) {
             const profileborderData = await s3.getObject({Bucket: 'colorbot', Key: 'colorbot_rank/profileborder/profilebroder_default.png'})
@@ -54,8 +59,6 @@ module.exports = {
         const guildboxData = await s3.getObject({Bucket: 'colorbot', Key: 'colorbot_rank/guildbox/guildbox_default.png'})
         .promise();
         const achievementBarData = await s3.getObject({Bucket: 'colorbot', Key: 'colorbot_rank/achievementbar/achievement_bar_default.png'})
-        .promise();
-        const guildlogoData = await s3.getObject({Bucket: 'colorbot', Key: 'colorbot_rank/guildlogo/guildlogo_1.png'})
         .promise();
 
         //Background image
@@ -72,7 +75,7 @@ module.exports = {
 
         //Coin image
         const coin = await Canvas.loadImage(Buffer.from(coinData.Body));
-        context.drawImage(coin, 182, 85, coin.width, coin.height);
+        context.drawImage(coin, 182, 88, coin.width, coin.height);
 
         //xpbackgroundImage
         const xpbar = await Canvas.loadImage(Buffer.from(xpbarData.Body));
@@ -85,6 +88,17 @@ module.exports = {
         // //profileTitleBackground image
         // const guildlogo = await Canvas.loadImage(Buffer.from(guildlogoData.Body));
         // context.drawImage(guildlogo, 154, 11, 28, 28);
+
+        if (storedGuild) {
+            const guildlogoData = await s3.getObject({Bucket: 'colorbot', Key: 'colorbot_rank/guildlogo/guildlogo_1.png'})
+            .promise();
+        } else {
+            //Achievement text
+            context.textAlign = 'center';
+            context.font = '20px CookieRun';
+            context.fillStyle = '#ffffff';
+            context.fillText("무소속", 393.5, 58)
+        }
 
         //Achievement text
         context.textAlign = 'center';
@@ -99,21 +113,22 @@ module.exports = {
         context.fillText(interaction.guild.members.cache.get(target.id).displayName, 190, 72)
 
         //User Amount Rank
+        context.textAlign = 'right';
         context.font = '10px CookieRun';
         const storedUserRank = await client.getRank(target.id, interaction.guild.id);
-        context.fillText(`${String(storedUserRank.rank)}위`, 170, 94)
+        context.fillText(`${String(storedUserRank.rank)}위`, 180, 97)
         context.strokeStyle = "#717070";
         context.lineWidth = 0.5;
-        context.strokeText(`${String(storedUserRank.rank)}위`, 170, 94);
+        context.strokeText(`${String(storedUserRank.rank)}위`, 180, 97);
 
         //User Amount
         context.textAlign = 'left';
         context.font = '10px CookieRun';
-        context.fillText(priceAdjust.priceCommas(storedUser.balance), 195, 94)
+        context.fillText(priceAdjust.priceCommas(storedUser.balance), 195, 97)
         context.fillStyle = '#000000';
         context.strokeStyle = "#717070";
         context.lineWidth = 0.5;
-        context.strokeText(priceAdjust.priceCommas(storedUser.balance), 195, 94);
+        context.strokeText(priceAdjust.priceCommas(storedUser.balance), 195, 97);
 
 
         //LV
@@ -138,14 +153,14 @@ module.exports = {
         // // context.font = '25px Malgun Gothic';
         // // context.fillText('3', 130, 175)
 
-        // //Arc for Total xp
-        // context.beginPath();
-        // context.strokeStyle = '#ffffff'
-        // context.fillStyle = '#E6C7D5';
-        // context.roundRect(186,149,230 * (0.5),15,9);
-        // context.stroke()
-        // context.fill();
-        // context.closePath();
+        //Arc for Total xp
+        context.beginPath();
+        context.strokeStyle = '#ffffff'
+        context.fillStyle = '#E6C7D5';
+        context.roundRect(69,144,210 * (storedUser.exp.voice/client.expTable.get(storedUser.exp.voiceLevel)[0]),15,9);
+        context.stroke()
+        context.fill();
+        context.closePath();
         context.save()
 
         //Arc for profile pic
@@ -165,7 +180,7 @@ module.exports = {
         context.drawImage(profileBorder, 33, 27, profileBorder.width, profileBorder.height);
 
         const attachment = new Discord.AttachmentBuilder(canvas.toBuffer('image/png'), { name: 'rank-image.png'})
-        interaction.reply({files: [attachment]})
+        return await interaction.reply({files: [attachment]})
         // console.log(attach)
 
 

@@ -15,6 +15,7 @@ module.exports = (client) => {
             await storedUser.save().then(async user => {
                 console.log(`[User Created]: UserID: ${userId}, GuildID: ${guildId}`);
             }).catch(console.error);
+            // storedUser = await User.findOne({ userId: userId, guildId: guildId });
             return storedUser; 
         } else return storedUser;
     }
