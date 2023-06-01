@@ -195,4 +195,13 @@ module.exports = class Error {
             )
             .setFooter({ text: `𓇼PALETTE𓇼`, iconURL: `https://cdn.discordapp.com/attachments/1013114492948840540/1095783759216922654/IMG_4037.png`})
     }
+
+    rockpaperscissors(interaction, amount) {
+        return new EmbedBuilder()
+            .setTitle("가위바위보")
+            .addFields(
+                { name: `플레이어 1:`, value: `<@${interaction.user.id}>\n대기중...`, inline: true }
+            )
+            .setFooter({ text: `베팅금액: ${amount}` })
+    }
 }

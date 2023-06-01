@@ -62,6 +62,32 @@ module.exports = class Button {
             .setStyle(ButtonStyle.Primary)
     }
 
+    rockpaperscissorsJoin() {
+        return new ButtonBuilder()
+            .setCustomId('rockpaperscissorsjoin')
+            .setLabel("참가")
+            .setStyle(ButtonStyle.Success)
+    }
+
+    rockpaperscissorsType(type) {
+        if (type === 'paper') {
+            return new ButtonBuilder()
+            .setCustomId('rockpaperscissorspaper')
+            .setLabel("빠")
+            .setStyle(ButtonStyle.Success)
+        } else if (type === 'scissors') {
+            return new ButtonBuilder()
+            .setCustomId('rockpaperscissorsscissors')
+            .setLabel("찌")
+            .setStyle(ButtonStyle.Success)
+        } else {
+            return new ButtonBuilder()
+            .setCustomId('rockpaperscissorsrock')
+            .setLabel("묵")
+            .setStyle(ButtonStyle.Success)
+        }
+    }
+
     inhouseButton(id) {
         if (id === 'inhouseRegister') {
             return new ButtonBuilder()

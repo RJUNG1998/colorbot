@@ -37,7 +37,7 @@ module.exports = {
                             await newState.guild.members.cache.get(newState.id).roles.remove(client.heartTable.get(storedUser.exp.role));
                             await newState.guild.members.cache.get(newState.id).roles.add(client.heartTable.get(client.expTable.get(storedUser.exp.voiceLevel + 1)[2]));
                             const backgroundArray = storedUser.profileSource.backgroundInventory;
-                            if (!backgroundArray.include(`background_${client.expTable.get(storedUser.exp.voiceLevel + 1)[2]}`)) {
+                            if (!backgroundArray.includes(`background_${client.expTable.get(storedUser.exp.voiceLevel + 1)[2]}`)) {
                                 backgroundArray.push(`background_${client.expTable.get(storedUser.exp.voiceLevel + 1)[2]}`);
                             }
                         }
