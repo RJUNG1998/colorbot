@@ -14,7 +14,8 @@ module.exports = {
         .addIntegerOption(option =>
             option.setName("금액")
                 .setDescription('송금할 금액을 입력해주세요.')
-                .setRequired(true)),
+                .setRequired(true)
+                .setMinValue(1)),
 
     async execute(interaction, client) {
         const embeds = new Embeds();
@@ -23,7 +24,7 @@ module.exports = {
 
         const storedUser = await client.fetchUser(interaction.user.id, interaction.guild.id);
         const storedTargetUser = await client.fetchUser(target.id, interaction.guild.id);
-
+    
         if (storedUser.balance >= amount) {
             await User.findOneAndUpdate(
                 { _id: storedUser._id },

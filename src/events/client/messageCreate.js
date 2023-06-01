@@ -45,6 +45,27 @@ module.exports = {
         //     })
         // }
 
+        // if (message.content === "업데이트입니다뷁") {
+        //     console.log('뷁')
+        //     const tmpStoredUser = await User.find({})
+        //     console.log(message.guild.members.cache.has(message.author.id))
+        //     // console.log(message.guild.members.fetch(message.author.id).roles.remove())
+
+        //     for(const data of tmpStoredUser) {
+        //         if (message.guild.members.cache.has(data.userId)) {
+        //             let member = await message.guild.members.fetch(data.userId)
+        //             for (const [key,value] of client.heartTable.entries()) {
+        //                 if (member.roles.cache.has(value)) {
+        //                     await member.roles.remove(value)
+        //                 }
+        //             }
+        //             await member.roles.add(client.heartTable.get(data.exp.role))
+        //             console.log(data.userId, 'success')
+        //         }
+                
+        //     }
+        // }
+
         const today = new Date();
         
         if (Number(today) - Number(storedUser.cooldown.chat) > 60000) {
