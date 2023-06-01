@@ -28,9 +28,9 @@ module.exports = {
         //     }})
         // }
         
-        // /**
-        //  * 데이터베이스 데이터 업데이트 할때
-        //  **/
+        /**
+         * 데이터베이스 데이터 업데이트 할때
+         **/
         // if (message.content === "잠시업데이트입니다뷁") {
         //     console.log("뷁")
         //     await User.updateMany({}, {
@@ -43,21 +43,29 @@ module.exports = {
         //     const tmpStoredUser = await User.find({})
 
         //     for(const data of tmpStoredUser) {
-        //         if (message.guild.members.cache.has(data.userId)) {
-
-        //             let member = await message.guild.members.fetch(data.userId);
-        //             if (member.roles.cache.has("953726054038646844")) {
-        //                 console.log(data.userId, member.displayName)
-                        // const tmp = data.profileSource.backgroundInventory;
-                        // tmp.push('background_boost')
-                        // await User.findOneAndUpdate(
-                        //     { _id: data._id },
-                        //     {
-                        //         'profileSource.background': 'background_boost',
-                        //         'profileSource.backgroundInventory': tmp
-                        //     }
-                        // )
+        //         await User.findOneAndUpdate(
+        //             { _id: data._id },
+        //             {
+        //                 'profileSource.profileBorder': `profile_border_${client.expTable.get(data.exp.voiceLevel)[2]}`,
+        //                 'profileSource.profileNameBar': `profile_name_bar_${client.expTable.get(data.exp.voiceLevel)[2]}`,
+        //                 'profileSource.background': `background_${client.expTable.get(data.exp.voiceLevel)[2]}`,
         //             }
+        //         )
+        //         // if (message.guild.members.cache.has(data.userId)) {
+
+        //             // let member = await message.guild.members.fetch(data.userId);
+        //             // if (member.roles.cache.has("953726054038646844")) {
+        //             //     console.log(data.userId, member.displayName)
+        //             //     const tmp = data.profileSource.backgroundInventory.filter(elem => elem !== 'background_boost');
+        //             //     tmp.push('background_boost')
+        //             //     await User.findOneAndUpdate(
+        //             //         { _id: data._id },
+        //             //         {
+        //             //             'profileSource.background': 'background_boost',
+        //             //             'profileSource.backgroundInventory': tmp
+        //             //         }
+        //             //     )
+        //             // }
         //             // // console.log("yes", data.userId, member.displayName)
         //             // await User.findOneAndUpdate(
         //             //     { _id: data._id },
@@ -67,7 +75,7 @@ module.exports = {
         //             //     }
         //             // )
         //             // console.log(data.userId, 'success')
-        //         }
+        //         // }
                 
         //     }
         //     console.log("done")
@@ -76,16 +84,6 @@ module.exports = {
         const today = new Date();
         
         if (Number(today) - Number(storedUser.cooldown.chat) > 60000) {
-            // if (await storedUser.exp.chat+1 >= client.expTable.get(await storedUser.exp.chatLevel)[0]) { //level up
-            //     //TODO: output embed for congrat level up
-            //     await User.findOneAndUpdate(
-            //         { _id: storedUser._id },
-            //         {
-            //             'exp.chatLevel': await storedUser.exp.chatLevel + 1,
-            //             'exp.chat': 0,
-            //         }
-            //     )
-            // }
             await User.findOneAndUpdate(
                 { _id: storedUser._id },
                 { 

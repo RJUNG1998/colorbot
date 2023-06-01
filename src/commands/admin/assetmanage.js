@@ -37,7 +37,7 @@ module.exports = {
         const action = interaction.options.getString("동작");
         const oldAmount = storedUser.balance;
 
-        console.log(amount)
+        // console.log(amount)
 
         switch (action) {
             case "edit":

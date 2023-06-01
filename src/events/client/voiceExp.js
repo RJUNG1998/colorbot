@@ -1,5 +1,5 @@
 const { EmbedBuilder } = require('discord.js')
-const User = require('../src/schemas/user')
+const User = require('../../schemas/user')
 
 const BalanceIntervals = new Map();
 const XPIntervals = new Map();
@@ -37,8 +37,8 @@ module.exports = {
                             await newState.guild.members.cache.get(newState.id).roles.remove(client.heartTable.get(storedUser.exp.role));
                             await newState.guild.members.cache.get(newState.id).roles.add(client.heartTable.get(client.expTable.get(storedUser.exp.voiceLevel + 1)[2]));
                             const backgroundArray = storedUser.profileSource.backgroundInventory;
-                            if (!backgroundArray.include(`background_${client.heartTable.get(client.expTable.get(storedUser.exp.voiceLevel + 1)[2])}`)) {
-                                backgroundArray.push(`background_${client.heartTable.get(client.expTable.get(storedUser.exp.voiceLevel + 1)[2])}`);
+                            if (!backgroundArray.include(`background_${client.expTable.get(storedUser.exp.voiceLevel + 1)[2]}`)) {
+                                backgroundArray.push(`background_${client.expTable.get(storedUser.exp.voiceLevel + 1)[2]}`);
                             }
                         }
 
@@ -50,9 +50,9 @@ module.exports = {
                                 'exp.voice': 2,
                                 'exp.voiceTotal': storedUser.exp.voiceTotal + 2,
                                 'exp.role': client.expTable.get(storedUser.exp.voiceLevel + 1)[2],
-                                'profileSource.profileBorder': `profile_border_${client.heartTable.get(client.expTable.get(storedUser.exp.voiceLevel + 1)[2])}`,
-                                'profileSource.profileNameBar': `profile_name_bar_${client.heartTable.get(client.expTable.get(storedUser.exp.voiceLevel + 1)[2])}`,
-                                'profileSource.background': `background_${client.heartTable.get(client.expTable.get(storedUser.exp.voiceLevel + 1)[2])}`,
+                                'profileSource.profileBorder': `profile_border_${client.expTable.get(storedUser.exp.voiceLevel + 1)[2]}`,
+                                'profileSource.profileNameBar': `profile_name_bar_${client.expTable.get(storedUser.exp.voiceLevel + 1)[2]}`,
+                                'profileSource.background': `background_${client.expTable.get(storedUser.exp.voiceLevel + 1)[2]}`,
                                 balance: storedUser.balance + client.expTable.get(storedUser.exp.voiceLevel)[0]
                             }
                         )

@@ -15,6 +15,7 @@ module.exports = {
             .setCustomId('inventory')
 
         storedUser.profileSource.backgroundInventory.forEach(value => {
+            // console.log(value)
             menu.addOptions(new StringSelectMenuOptionBuilder()
                 .setLabel(`백그라운드`)
                 .setDescription(`${storedRankItem.itemList.background[value.split('_')[1]].name}`)
@@ -23,7 +24,7 @@ module.exports = {
         })
 
         storedUser.profileSource.achievementInventory.forEach(value => {
-            console.log(storedRankItem.itemList.achievement[value])
+            // console.log(storedRankItem.itemList.achievement[value])
             menu.addOptions(new StringSelectMenuOptionBuilder()
                 .setLabel(`칭호`)
                 .setDescription(`${storedRankItem.itemList.achievement[value].name}`)
