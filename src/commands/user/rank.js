@@ -38,6 +38,10 @@ module.exports = {
             storedUser.guildName
         );
 
+        const storedRankItem = await client.getItems(
+            'rank'
+        )
+
         Canvas.GlobalFonts.registerFromPath(join(__dirname, '..', '..', 'assets', 'fonts', 'CookieRun_Regular.ttf'), 'CookieRun')
         const canvas = Canvas.createCanvas(500, 188);
         const context = canvas.getContext('2d');
@@ -50,10 +54,10 @@ module.exports = {
         .promise();
         const profileNameBarData = await s3.getObject({Bucket: 'colorbot', Key: `colorbot_rank/profilenamebar/${storedUser.profileSource.profileNameBar}.png`})
         .promise();
-        if (storedUser.profileSource.border) {
-            const profileborderData = await s3.getObject({Bucket: 'colorbot', Key: 'colorbot_rank/profileborder/profilebroder_default.png'})
-            .promise();
-        }
+        // if (storedUser.profileSource.profileBorderFilter) {
+        //     const profileborderData = await s3.getObject({Bucket: 'colorbot', Key: 'colorbot_rank/profileborder/profilebroder_default.png'})
+        //     .promise();
+        // }
         const xpbarData = await s3.getObject({Bucket: 'colorbot', Key: 'colorbot_rank/xpbar/levelbar_default.png'})
         .promise();
         const guildboxData = await s3.getObject({Bucket: 'colorbot', Key: 'colorbot_rank/guildbox/guildbox_default.png'})
@@ -100,11 +104,12 @@ module.exports = {
             context.fillText("무소속", 393.5, 58)
         }
 
+        // console.log(storedUser.profileSource.achievement)
         //Achievement text
         context.textAlign = 'center';
         context.font = '11px CookieRun';
         context.fillStyle = '#000000';
-        context.fillText(storedUser.profileSource.achievement, 210, 37)
+        context.fillText(storedRankItem.itemList.achievement[storedUser.profileSource.achievement].name, 210, 37)
 
         //Username text
         context.textAlign = 'center';

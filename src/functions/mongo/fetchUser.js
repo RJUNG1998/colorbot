@@ -6,7 +6,7 @@ module.exports = (client) => {
         let storedUser = await User.findOne({ userId: userId, guildId: guildId });
         
         if (!storedUser) {
-            storedUser = await new User({
+            storedUser = new User({
                 _id: new Types.ObjectId(),
                 userId: userId,
                 guildId: guildId,

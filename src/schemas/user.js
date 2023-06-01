@@ -25,11 +25,13 @@ const userSchema = new Schema({
     guildName: { type: String, default: null },
     profileSource: {
         background: { type: String, default: 'background_gray' },
-        backgroundInventory: [String],
+        backgroundInventory: { type: Array, default: ['background_gray'] },
+        profileBorderFilterInventory: { type: Array, default: [] },
+        achievementInventory: { type: Array, default: ['beginner'] },
         profileBorder: { type: String, default: 'profile_border_gray' },
         profileNameBar: { type: String, default: 'profile_name_bar_gray' },
-        achievement: { type: String, default: '자라는 새싹' },
-        border: { type: String, default: null },
+        achievement: { type: String, default: 'beginner' },
+        profileBorderFilter: { type: String, default: null },
     }
 
 
