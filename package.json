@@ -12,7 +12,7 @@
   "dependencies": {
     "@discordjs/rest": "^1.7.0",
     "@napi-rs/canvas": "^0.1.41",
-    "aws-sdk": "^2.1384.0",
+    "aws-sdk": "^2.1390.0",
     "chalk": "^4.1.2",
     "discord-api-types": "^0.37.38",
     "discord.js": "^14.9.0",
