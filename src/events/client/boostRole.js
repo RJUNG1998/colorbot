@@ -1,4 +1,4 @@
-const User = require('../../schemas/user')
+const User = require('../src/schemas/user')
 
 module.exports = {
     name: 'guildMemberUpdate',

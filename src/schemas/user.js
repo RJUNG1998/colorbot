@@ -31,6 +31,8 @@ const userSchema = new Schema({
         profileBorder: { type: String, default: 'profile_border_gray' },
         profileNameBar: { type: String, default: 'profile_name_bar_gray' },
         achievement: { type: String, default: 'beginner' },
+        hiddenitem: { type: String, default: '' },
+        hiddenitemInventory: { type: Array, default: [] },
         profileBorderFilter: { type: String, default: null },
     }
 

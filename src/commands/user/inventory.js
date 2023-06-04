@@ -32,6 +32,15 @@ module.exports = {
             )
         })
 
+        storedUser.profileSource.hiddenitemInventory.forEach(value => {
+            console.log(value)
+            menu.addOptions(new StringSelectMenuOptionBuilder()
+                .setLabel(`아이템`)
+                .setDescription(`${storedUser.profileSource.hiddenitemInventory}`)
+                .setValue(`hiddenitem 1`)
+            )
+        })
+
         return await interaction.reply({ components: [new ActionRowBuilder().addComponents(menu)], ephemeral: true })
     }
 }

@@ -37,6 +37,11 @@ const itemsSchema = new Schema({
             source: String
         }
       },
+      hiddenitem: {
+        brush: {
+          name: String,
+        }
+      },
       guildlogo: {},
       profileborder: {},
       profilenamebar: {},

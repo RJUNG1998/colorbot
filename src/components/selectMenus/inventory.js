@@ -23,6 +23,8 @@ module.exports = {
                     break;
                 case "achievement":
                     break;
+                case "hiddenitem":
+                    break;
                 default:
                     break;
             }
