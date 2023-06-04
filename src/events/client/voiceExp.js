@@ -1,5 +1,5 @@
 const { EmbedBuilder } = require('discord.js')
-const User = require('../src/schemas/user')
+const User = require('../../schemas/user')
 
 const BalanceIntervals = new Map();
 const XPIntervals = new Map();
