@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, ActionRowBuilder, TextInputBuilder, ModalBuilder, TextInputStyle } = require('discord.js');
-const Embeds = require('../src/class/embeds');
+const Embeds = require('../../class/embeds');
 
 module.exports = {
     data: new SlashCommandBuilder()
