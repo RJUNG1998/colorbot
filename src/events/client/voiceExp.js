@@ -8,8 +8,8 @@ module.exports = {
     async execute(oldState, newState, client) {
         const AMOUNT = 15
         const userId = newState.id;
-        const bots = client.members.cache.get(userId).roles.cache.has('1073555219297873970') // 🤖+ 역할
-        const smurf = client.members.cache.get(userId).roles.cache.has('984711293833478164') // 부계 역할
+        const bots = client.guild.members.cache.get(userId).roles.cache.has('1073555219297873970') // 🤖+ 역할
+        const smurf = client.guild.members.cache.get(userId).roles.cache.has('984711293833478164') // 부계 역할
         //입장문
         if (newState.channel && !oldState.channel) {
             await client.fetchUser(
