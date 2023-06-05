@@ -112,6 +112,14 @@ module.exports = class Error {
             .setFooter({ text: `𓇼PALETTE𓇼`, iconURL: `https://cdn.discordapp.com/banners/937556248847581244/8487863eb9ed580eee9158f944d28fc0.webp?size=240`}) 
     }
 
+    levelranking() {
+        return new EmbedBuilder()
+            .setTitle("레벨 순위")
+            .setThumbnail(`https://cdn-icons-png.flaticon.com/512/1603/1603847.png`)
+            .setColor("Orange")
+            .setFooter({ text: `𓇼PALETTE𓇼`, iconURL: `https://cdn.discordapp.com/banners/937556248847581244/8487863eb9ed580eee9158f944d28fc0.webp?size=240`}) 
+    }
+
     assetManageSuccess(targetId, oldAmount, newAmount) {
         return new EmbedBuilder()
             .setTitle(`수정 완료`)
