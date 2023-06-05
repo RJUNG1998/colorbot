@@ -49,6 +49,15 @@ module.exports = class Error {
             .setFooter({ text: `𓇼PALETTE𓇼`, iconURL: `https://cdn.discordapp.com/banners/937556248847581244/8487863eb9ed580eee9158f944d28fc0.webp?size=240`})
     }
 
+    sendMoneyToMe() {
+        return new EmbedBuilder()
+            .setTitle('에러')
+            .setThumbnail(`https://cdn-icons-png.flaticon.com/512/595/595067.png`)
+            .setDescription('본인 스스로가 송금의 대상이 될 수 없습니다.')  
+            .setColor("FFD764")
+            .setFooter({ text: `𓇼PALETTE𓇼`, iconURL: `https://cdn.discordapp.com/banners/937556248847581244/8487863eb9ed580eee9158f944d28fc0.webp?size=240`})
+    }
+
     assetCheckError() {
         return new EmbedBuilder()
             .setTitle('에러')
