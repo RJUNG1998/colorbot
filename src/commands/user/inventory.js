@@ -13,7 +13,6 @@ module.exports = {
                 .setRequired(true)
                 .addChoices(
                     { name: "정보", value: "info" },
-                    { name: "기타", value: "etc" },
                 )),
     async execute(interaction, client) {
         const storedUser = await client.fetchUser(interaction.user.id, interaction.guild.id);
