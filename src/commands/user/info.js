@@ -74,7 +74,8 @@ module.exports = {
 
         //Achievement Bar image
         const achievementBar = await Canvas.loadImage(Buffer.from(achievementBarData.Body));
-        context.drawImage(achievementBar, 155, 22, achievementBar.width, achievementBar.height);
+        console.log(achievementBar.width, achievementBar.height)
+        context.drawImage(achievementBar, 155-(Math.round(achievementBar.width-110)/2), 22-(Math.round(achievementBar.height-23)/2), achievementBar.width, achievementBar.height);
 
         //Coin image
         const coin = await Canvas.loadImage(Buffer.from(coinData.Body));
