@@ -6,40 +6,55 @@ const Item = require('../../schemas/item');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName("인벤토리")
-        .setDescription('내 인벤토리를 체크합니다.'),
+        .setDescription('내 인벤토리를 체크합니다.')
+        .addStringOption(option => 
+            option.setName("종류")
+                .setDescription("어떤 인벤토리를 열것인지 선택해주세요.")
+                .setRequired(true)
+                .addChoices(
+                    { name: "정보", value: "info" },
+                    { name: "기타", value: "etc" },
+                )),
     async execute(interaction, client) {
         const storedUser = await client.fetchUser(interaction.user.id, interaction.guild.id);
-        const storedRankItem = await client.getItems('rank')
+        const storedRankItem = await client.getItems('info')
+        const action = interaction.options.getString("종류");
 
         const menu = new StringSelectMenuBuilder()
             .setCustomId('inventory')
 
-        storedUser.profileSource.backgroundInventory.forEach(value => {
-            // console.log(value)
-            menu.addOptions(new StringSelectMenuOptionBuilder()
-                .setLabel(`백그라운드`)
-                .setDescription(`${storedRankItem.itemList.background[value.split('_')[1]].name}`)
-                .setValue(`background ${value}`)
-            )
-        })
+        switch (action) {
+            case 'info':
+                storedUser.profileSource.backgroundInventory.forEach(value => {
+                    menu.addOptions(new StringSelectMenuOptionBuilder()
+                        .setLabel(`백그라운드`)
+                        .setDescription(`${storedRankItem.itemList.background[value].name}`)
+                        .setValue(`background ${value}`)
+                    )
+                })
+                storedUser.profileSource.achievementInventory.forEach(value => {
+                    // console.log(storedRankItem.itemList.achievement[value])
+                    menu.addOptions(new StringSelectMenuOptionBuilder()
+                        .setLabel(`칭호`)
+                        .setDescription(`${storedRankItem.itemList.achievement[value].name}`)
+                        .setValue(`achievement ${value}`)
+                    )
+                })
+                break;
+            case 'etc':
+                break;
+            default:
+                break;
+        }
 
-        storedUser.profileSource.achievementInventory.forEach(value => {
-            // console.log(storedRankItem.itemList.achievement[value])
-            menu.addOptions(new StringSelectMenuOptionBuilder()
-                .setLabel(`칭호`)
-                .setDescription(`${storedRankItem.itemList.achievement[value].name}`)
-                .setValue(`achievement ${value}`)
-            )
-        })
-
-        storedUser.profileSource.hiddenitemInventory.forEach(value => {
-            console.log(value)
-            menu.addOptions(new StringSelectMenuOptionBuilder()
-                .setLabel(`아이템`)
-                .setDescription(`${storedUser.profileSource.hiddenitemInventory}`)
-                .setValue(`hiddenitem 1`)
-            )
-        })
+        // storedUser.profileSource.hiddenitemInventory.forEach(value => {
+        //     console.log(value)
+        //     menu.addOptions(new StringSelectMenuOptionBuilder()
+        //         .setLabel(`아이템`)
+        //         .setDescription(`${storedUser.profileSource.hiddenitemInventory}`)
+        //         .setValue(`hiddenitem 1`)
+        //     )
+        // })
 
         return await interaction.reply({ components: [new ActionRowBuilder().addComponents(menu)], ephemeral: true })
     }

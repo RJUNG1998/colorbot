@@ -37,8 +37,8 @@ module.exports = {
                             await newState.guild.members.cache.get(newState.id).roles.remove(client.heartTable.get(storedUser.exp.role));
                             await newState.guild.members.cache.get(newState.id).roles.add(client.heartTable.get(client.expTable.get(storedUser.exp.voiceLevel + 1)[2]));
                             const backgroundArray = storedUser.profileSource.backgroundInventory;
-                            if (!backgroundArray.includes(`background_${client.expTable.get(storedUser.exp.voiceLevel + 1)[2]}`)) {
-                                backgroundArray.push(`background_${client.expTable.get(storedUser.exp.voiceLevel + 1)[2]}`);
+                            if (!backgroundArray.includes(`${client.expTable.get(storedUser.exp.voiceLevel + 1)[2]}`)) {
+                                backgroundArray.push(`${client.expTable.get(storedUser.exp.voiceLevel + 1)[2]}`);
                             }
                         }
 
@@ -50,9 +50,9 @@ module.exports = {
                                 'exp.voice': 2,
                                 'exp.voiceTotal': storedUser.exp.voiceTotal + 2,
                                 'exp.role': client.expTable.get(storedUser.exp.voiceLevel + 1)[2],
-                                'profileSource.profileBorder': `profile_border_${client.expTable.get(storedUser.exp.voiceLevel + 1)[2]}`,
-                                'profileSource.profileNameBar': `profile_name_bar_${client.expTable.get(storedUser.exp.voiceLevel + 1)[2]}`,
-                                'profileSource.background': `background_${client.expTable.get(storedUser.exp.voiceLevel + 1)[2]}`,
+                                'profileSource.profileBorder': `${client.expTable.get(storedUser.exp.voiceLevel + 1)[2]}`,
+                                'profileSource.profileNameBar': `${client.expTable.get(storedUser.exp.voiceLevel + 1)[2]}`,
+                                'profileSource.background': `${client.expTable.get(storedUser.exp.voiceLevel + 1)[2]}`,
                                 balance: storedUser.balance + client.expTable.get(storedUser.exp.voiceLevel)[0]
                             }
                         )

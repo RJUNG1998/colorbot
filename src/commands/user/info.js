@@ -12,11 +12,11 @@ const { join } = require('path')
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName("랭크")
-        .setDescription("유저의 랭크를 확인합니다.")
+        .setName("정보")
+        .setDescription("유저의 정보를 확인합니다.")
         .addUserOption(option =>
             option.setName("대상")
-                .setDescription('랭크를 확인할 유저를 지정해주세요. (지정하지 않으면 자신의 랭크를 확인합니다.)')
+                .setDescription('정보를 확인할 유저를 지정해주세요. (지정하지 않으면 자신의 정보를 확인합니다.)')
                 .setRequired(false)),
     async execute(interaction, client) {
 
@@ -38,21 +38,20 @@ module.exports = {
             storedUser.guildName
         );
 
-        const storedRankItem = await client.getItems(
-            'rank'
-        )
+        const storedRankItem = await client.getItems('info')
 
         Canvas.GlobalFonts.registerFromPath(join(__dirname, '..', '..', 'assets', 'fonts', 'CookieRun_Regular.ttf'), 'CookieRun')
         const canvas = Canvas.createCanvas(500, 188);
         const context = canvas.getContext('2d');
+
         
-        const backgroundData = await s3.getObject({Bucket: 'colorbot', Key: `colorbot_rank/background/${storedUser.profileSource.background}.png`})
+        const backgroundData = await s3.getObject({Bucket: 'colorbot', Key: `colorbot_rank/background/${storedRankItem.itemList.background[storedUser.profileSource.background].source}`})
         .promise();
         const coinData = await s3.getObject({Bucket: 'colorbot', Key: 'colorbot_rank/coin/coin.png'})
         .promise();
-        const profileborderData = await s3.getObject({Bucket: 'colorbot', Key: `colorbot_rank/profileborder/${storedUser.profileSource.profileBorder}.png`})
+        const profileborderData = await s3.getObject({Bucket: 'colorbot', Key: `colorbot_rank/profileborder/${storedRankItem.itemList.profileborder[storedUser.exp.role].source}`})
         .promise();
-        const profileNameBarData = await s3.getObject({Bucket: 'colorbot', Key: `colorbot_rank/profilenamebar/${storedUser.profileSource.profileNameBar}.png`})
+        const profileNameBarData = await s3.getObject({Bucket: 'colorbot', Key: `colorbot_rank/profilenamebar/${storedRankItem.itemList.profilenamebar[storedUser.exp.role].source}`})
         .promise();
         // if (storedUser.profileSource.profileBorderFilter) {
         //     const profileborderData = await s3.getObject({Bucket: 'colorbot', Key: 'colorbot_rank/profileborder/profilebroder_default.png'})
@@ -62,7 +61,7 @@ module.exports = {
         .promise();
         const guildboxData = await s3.getObject({Bucket: 'colorbot', Key: 'colorbot_rank/guildbox/guildbox_default.png'})
         .promise();
-        const achievementBarData = await s3.getObject({Bucket: 'colorbot', Key: 'colorbot_rank/achievementbar/achievement_bar_default.png'})
+        const achievementBarData = await s3.getObject({Bucket: 'colorbot', Key: `colorbot_rank/achievementbar/${storedRankItem.itemList.achievement[storedUser.profileSource.achievement].source}`})
         .promise();
 
         //Background image
