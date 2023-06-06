@@ -34,9 +34,7 @@ const userSchema = new Schema({
         hiddenitem: { type: String, default: '' },
         hiddenitemInventory: { type: Array, default: [] },
         profileBorderFilter: { type: String, default: null },
-    }
-
-
+    },
 });
 
 module.exports = model("User", userSchema, "users");

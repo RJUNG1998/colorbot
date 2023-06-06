@@ -74,7 +74,6 @@ module.exports = {
 
         //Achievement Bar image
         const achievementBar = await Canvas.loadImage(Buffer.from(achievementBarData.Body));
-        console.log(achievementBar.width, achievementBar.height)
         context.drawImage(achievementBar, 155-(Math.round(achievementBar.width-110)/2), 22-(Math.round(achievementBar.height-23)/2), achievementBar.width, achievementBar.height);
 
         //Coin image
@@ -120,6 +119,7 @@ module.exports = {
         //User Amount Rank
         context.textAlign = 'right';
         context.font = '10px CookieRun';
+        context.fillStyle = storedRankItem.itemList.background[storedUser.profileSource.background].fillStyle;
         const storedUserRank = await client.getRank(target.id, interaction.guild.id);
         context.fillText(`${String(storedUserRank.rank)}위`, 180, 97)
         context.strokeStyle = "#717070";
@@ -130,7 +130,7 @@ module.exports = {
         context.textAlign = 'left';
         context.font = '10px CookieRun';
         context.fillText(priceAdjust.priceCommas(storedUser.balance), 195, 97)
-        context.fillStyle = '#000000';
+        context.fillStyle = storedRankItem.itemList.background[storedUser.profileSource.background].fillStyle;
         context.strokeStyle = "#717070";
         context.lineWidth = 0.5;
         context.strokeText(priceAdjust.priceCommas(storedUser.balance), 195, 97);
@@ -140,7 +140,7 @@ module.exports = {
         context.textAlign = 'center';
         context.font = '12px CookieRun';
         context.fillText(`LV`, 44, 138)
-        context.fillStyle = '#000000';
+        context.fillStyle = storedRankItem.itemList.background[storedUser.profileSource.background].fillStyle;
         context.strokeStyle = "#717070";
         context.lineWidth = 0.5;
         context.strokeText(`LV`, 44, 138);
@@ -149,7 +149,7 @@ module.exports = {
         context.textAlign = 'center';
         context.font = '23px CookieRun';
         context.fillText(String(storedUser.exp.voiceLevel), 43, 160)
-        context.fillStyle = '#000000';
+        context.fillStyle = storedRankItem.itemList.background[storedUser.profileSource.background].fillStyle;
         context.strokeStyle = "#717070";
         context.lineWidth = 0.5;
         context.strokeText(String(storedUser.exp.voiceLevel), 43, 160);

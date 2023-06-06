@@ -6,7 +6,7 @@ const User = require('../../schemas/user');
 
 module.exports = {
     data: {
-        name: 'inventory'
+        name: 'inventoryInfo'
     },
     async execute(interaction, client) {
         if (interaction.message.interaction.user.id !== interaction.user.id) {
@@ -22,6 +22,10 @@ module.exports = {
                     );
                     break;
                 case "achievement":
+                    await User.findOneAndUpdate(
+                        { _id: storedUser._id },
+                        { 'profileSource.achievement': interaction.values[0].split(' ')[1] }
+                    );
                     break;
                 case "hiddenitem":
                     break;
