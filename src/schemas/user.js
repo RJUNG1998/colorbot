@@ -35,6 +35,9 @@ const userSchema = new Schema({
         hiddenitemInventory: { type: Array, default: [] },
         profileBorderFilter: { type: String, default: null },
     },
+    items: {
+        enhanceInventory: { type: Array, default: [] }
+    }
 });
 
 module.exports = model("User", userSchema, "users");

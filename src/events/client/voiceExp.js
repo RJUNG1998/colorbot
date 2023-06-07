@@ -38,10 +38,10 @@ module.exports = {
                             newState.guild.id
                         );
                         if (storedUser.exp.voice+2 >= client.expTable.get(storedUser.exp.voiceLevel)[0]) {
+                            const backgroundArray = storedUser.profileSource.backgroundInventory;
                             if (storedUser.exp.role !== client.expTable.get(storedUser.exp.voiceLevel + 1)[2]) {
                                 await newState.guild.members.cache.get(newState.id).roles.remove(client.heartTable.get(storedUser.exp.role));
                                 await newState.guild.members.cache.get(newState.id).roles.add(client.heartTable.get(client.expTable.get(storedUser.exp.voiceLevel + 1)[2]));
-                                const backgroundArray = storedUser.profileSource.backgroundInventory;
                                 if (!backgroundArray.includes(`${client.expTable.get(storedUser.exp.voiceLevel + 1)[2]}`)) {
                                     backgroundArray.push(`${client.expTable.get(storedUser.exp.voiceLevel + 1)[2]}`);
                                 }
@@ -58,7 +58,8 @@ module.exports = {
                                     'profileSource.profileBorder': `${client.expTable.get(storedUser.exp.voiceLevel + 1)[2]}`,
                                     'profileSource.profileNameBar': `${client.expTable.get(storedUser.exp.voiceLevel + 1)[2]}`,
                                     'profileSource.background': `${client.expTable.get(storedUser.exp.voiceLevel + 1)[2]}`,
-                                    balance: storedUser.balance + client.expTable.get(storedUser.exp.voiceLevel)[0]
+                                    'profileSource.backgroundArray': backgroundArray,
+                                    balance: storedUser.balance + client.expTable.get(storedUser.exp.voiceLevel)[0],
                                 }
                             )
                         } else {
