@@ -42,10 +42,8 @@ module.exports = class Error {
 
     sendMoneyFail() {
         return new EmbedBuilder()
-            .setTitle('에러')
-            .setThumbnail(`https://cdn-icons-png.flaticon.com/512/595/595067.png`)
             .setDescription('잔액이 부족합니다.')  
-            .setColor("FFD764")
+            .setColor("Red")
             .setFooter({ text: `𓇼PALETTE𓇼`, iconURL: `https://cdn.discordapp.com/banners/937556248847581244/8487863eb9ed580eee9158f944d28fc0.webp?size=240`})
     }
 
@@ -221,4 +219,55 @@ module.exports = class Error {
             )
             .setFooter({ text: `베팅금액: ${amount}` })
     }
+
+    changedSuccessfulEmbed() {
+        return new EmbedBuilder()
+            .setColor('Green')
+            .setDescription(`변경사항이 적용되었습니다.`)
+            .setFooter({ text: `𓇼PALETTE𓇼`, iconURL: `https://imgur.com/IbL660e` })
+    }
+
+    alreadyOwnedEmbed() {
+        return new EmbedBuilder()
+            .setColor('Red')
+            .setDescription('이미 보유하고 있는 상품은 구매할 수 없습니다.')
+            .setFooter({ text: `𓇼PALETTE𓇼`, iconURL: `https://imgur.com/IbL660e` })
+    }
+
+    purchaseSuccessfulEmbed() {
+        return new EmbedBuilder()
+            .setColor('Green')
+            .setDescription('구매가 완료되었습니다!')
+            .setFooter({ text: `𓇼PALETTE𓇼`, iconURL: `https://imgur.com/IbL660e` })
+    }
+
+    noPermissionEmbed() {
+        return new EmbedBuilder()
+            .setColor('Red')
+            .setDescription('당신은 이 명령어를 사용할 권한이 없습니다.')
+            .setFooter({ text: `𓇼PALETTE𓇼`, iconURL: `https://imgur.com/IbL660e` })
+    }
+
+    noTitleExist() {
+        return new EmbedBuilder()
+            .setColor('Red')
+            .setDescription('입력하신 칭호는 데이터에 존재하지 않습니다.\n칭호의 이름을 다시 확인해 주세요.')
+            .setFooter({ text: `𓇼PALETTE𓇼`, iconURL: `https://imgur.com/IbL660e` })
+    }
+
+    yesTitleExist() {
+        return new EmbedBuilder()
+            .setColor('Red')
+            .setDescription('선택하신 유저는 해당 칭호를 이미 보유 중입니다.')
+            .setFooter({ text: `𓇼PALETTE𓇼`, iconURL: `https://imgur.com/IbL660e` })
+    }
+
+    noTitleDelete() {
+        return new EmbedBuilder()
+            .setColor('Red')
+            .setDescription('선택하신 유저는 해당 칭호를 보유하고 있지 않습니다.')
+            .setFooter({ text: `𓇼PALETTE𓇼`, iconURL: `https://imgur.com/IbL660e` })
+    }
+
+    
 }

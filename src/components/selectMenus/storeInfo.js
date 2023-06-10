@@ -9,15 +9,18 @@ module.exports = {
         name: 'storeInfo'
     },
     async execute(interaction, client) {
+
+        const embeds = new Embeds()
+
         const storedUser = await client.fetchUser(interaction.user.id, interaction.guild.id);
         const storedStore = await client.getStore('info');
         const type = interaction.values[0].split(' ')[0]
         switch (type){
             case "background":
                 if (storedStore.storeList.background[interaction.values[0].split(' ')[1]].price > storedUser.balance) {
-                    return await interaction.reply({ content: "소유하신 금액이 부족합니다.", ephemeral: true })
+                    return await interaction.reply({ embeds: [embeds.sendMoneyFail()], ephemeral: true })
                 } else if (storedUser.profileSource.backgroundInventory.includes(interaction.values[0].split(' ')[1])){
-                    return await interaction.reply({ content: "해당 백그라운드를 이미 보유중 입니다.", ephemeral: true })
+                    return await interaction.reply({ embeds: [embeds.alreadyOwnedEmbed()], ephemeral: true })
                 } else {
                     const tmp = storedUser.profileSource.backgroundInventory;
                     tmp.push(interaction.values[0].split(' ')[1])
@@ -29,7 +32,7 @@ module.exports = {
                             balance: storedUser.balance - storedStore.storeList.background[interaction.values[0].split(' ')[1]].price
                         }
                     );
-                    return await interaction.reply({ content: "성공적으로 구매하였습니다.", ephemeral: true })
+                    return await interaction.reply({ embeds: [embeds.purchaseSuccessfulEmbed()], ephemeral: true })
                 }
                 break;
             case "achievement":

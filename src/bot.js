@@ -8,7 +8,6 @@ client.commands = new Collection();
 client.selectMenus = new Collection();
 client.buttons = new Collection();
 client.modals = new Collection();
-// client.createdVoiceChannels = new Collection(); // autoVoiceChannel.js 전용
 client.logTotalTime = new Collection();
 client.commandArray = [];
 client.expTable = new Collection();
@@ -21,6 +20,7 @@ client.heartTable = new Map([
     ['blue', '970472530903191653'],
     ['purple', '1013129724282818600'],
 ]);
+client.test = []
 
 //경험치 테이블 셋업
 /** 
