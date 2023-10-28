@@ -109,8 +109,8 @@ module.exports = class Button {
                 .setStyle(ButtonStyle.Secondary)
         } else if (id === 'inhouseLink') {
             return new ButtonBuilder()
-                .setLabel(`op.gg 바로가기`)
-                .setURL('https://www.op.gg/')
+                .setLabel(`내전 데이터 시트`)
+                .setURL('https://docs.google.com/spreadsheets/d/1tjFyXdBc1qDftkHZVG5tJN5hDoSCATAcXNi_KbvyeBI/edit?usp=sharing')
                 .setStyle(ButtonStyle.Link)
         } else if (id === 'inhouseRift') {
             return new ButtonBuilder()

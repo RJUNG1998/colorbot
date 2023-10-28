@@ -43,12 +43,18 @@ module.exports = {
         //     const tmpStoredUser = await User.find({})
 
         //     for(const data of tmpStoredUser) {
+        //         const tmpArray = []
+                
+        //         data.profileSource.backgroundInventory.forEach(i => {
+        //             tmpArray.push(i.split('_')[1])
+        //         })
         //         await User.findOneAndUpdate(
         //             { _id: data._id },
         //             {
-        //                 'profileSource.profileBorder': `profile_border_${client.expTable.get(data.exp.voiceLevel)[2]}`,
-        //                 'profileSource.profileNameBar': `profile_name_bar_${client.expTable.get(data.exp.voiceLevel)[2]}`,
-        //                 'profileSource.background': `background_${client.expTable.get(data.exp.voiceLevel)[2]}`,
+        //                 'profileSource.profileBorder': data.profileSource.profileBorder.split('_')[2],
+        //                 'profileSource.profileNameBar': data.profileSource.profileNameBar.split('_')[3],
+        //                 'profileSource.background': data.profileSource.background.split('_')[1],
+        //                 'profileSource.backgroundInventory': tmpArray,
         //             }
         //         )
         //         // if (message.guild.members.cache.has(data.userId)) {

@@ -11,13 +11,13 @@ module.exports = {
                 newMember.guild.id
             );
             const backgroundInv = storedUser.profileSource.backgroundInventory;
-            if (!backgroundInv.includes('background_boost')){
-                backgroundInv.push('background_boost')
+            if (!backgroundInv.includes('boost')){
+                backgroundInv.push('boost')
             }
             await User.findOneAndUpdate(
-                { _id: data._id },
+                { _id: storedUser._id },
                 {
-                    'profileSource.background': 'background_boost',
+                    'profileSource.background': 'boost',
                     'profileSource.backgroundInventory': backgroundInv
                 }
             )

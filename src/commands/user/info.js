@@ -12,11 +12,11 @@ const { join } = require('path')
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName("랭크")
-        .setDescription("유저의 랭크를 확인합니다.")
+        .setName("정보")
+        .setDescription("유저의 정보를 확인합니다.")
         .addUserOption(option =>
             option.setName("대상")
-                .setDescription('랭크를 확인할 유저를 지정해주세요. (지정하지 않으면 자신의 랭크를 확인합니다.)')
+                .setDescription('정보를 확인할 유저를 지정해주세요. (지정하지 않으면 자신의 정보를 확인합니다.)')
                 .setRequired(false)),
     async execute(interaction, client) {
 
@@ -38,21 +38,20 @@ module.exports = {
             storedUser.guildName
         );
 
-        const storedRankItem = await client.getItems(
-            'rank'
-        )
+        const storedRankItem = await client.getItems('info')
 
         Canvas.GlobalFonts.registerFromPath(join(__dirname, '..', '..', 'assets', 'fonts', 'CookieRun_Regular.ttf'), 'CookieRun')
         const canvas = Canvas.createCanvas(500, 188);
         const context = canvas.getContext('2d');
+
         
-        const backgroundData = await s3.getObject({Bucket: 'colorbot', Key: `colorbot_rank/background/${storedUser.profileSource.background}.png`})
+        const backgroundData = await s3.getObject({Bucket: 'colorbot', Key: `colorbot_rank/background/${storedRankItem.itemList.background[storedUser.profileSource.background].source}`})
         .promise();
         const coinData = await s3.getObject({Bucket: 'colorbot', Key: 'colorbot_rank/coin/coin.png'})
         .promise();
-        const profileborderData = await s3.getObject({Bucket: 'colorbot', Key: `colorbot_rank/profileborder/${storedUser.profileSource.profileBorder}.png`})
+        const profileborderData = await s3.getObject({Bucket: 'colorbot', Key: `colorbot_rank/profileborder/${storedRankItem.itemList.profileborder[storedUser.exp.role].source}`})
         .promise();
-        const profileNameBarData = await s3.getObject({Bucket: 'colorbot', Key: `colorbot_rank/profilenamebar/${storedUser.profileSource.profileNameBar}.png`})
+        const profileNameBarData = await s3.getObject({Bucket: 'colorbot', Key: `colorbot_rank/profilenamebar/${storedRankItem.itemList.profilenamebar[storedUser.exp.role].source}`})
         .promise();
         // if (storedUser.profileSource.profileBorderFilter) {
         //     const profileborderData = await s3.getObject({Bucket: 'colorbot', Key: 'colorbot_rank/profileborder/profilebroder_default.png'})
@@ -62,7 +61,7 @@ module.exports = {
         .promise();
         const guildboxData = await s3.getObject({Bucket: 'colorbot', Key: 'colorbot_rank/guildbox/guildbox_default.png'})
         .promise();
-        const achievementBarData = await s3.getObject({Bucket: 'colorbot', Key: 'colorbot_rank/achievementbar/achievement_bar_default.png'})
+        const achievementBarData = await s3.getObject({Bucket: 'colorbot', Key: `colorbot_rank/achievementbar/${storedRankItem.itemList.achievement[storedUser.profileSource.achievement].source}`})
         .promise();
 
         //Background image
@@ -75,7 +74,7 @@ module.exports = {
 
         //Achievement Bar image
         const achievementBar = await Canvas.loadImage(Buffer.from(achievementBarData.Body));
-        context.drawImage(achievementBar, 155, 22, achievementBar.width, achievementBar.height);
+        context.drawImage(achievementBar, 155-(Math.round(achievementBar.width-110)/2), 22-(Math.round(achievementBar.height-23)/2), achievementBar.width, achievementBar.height);
 
         //Coin image
         const coin = await Canvas.loadImage(Buffer.from(coinData.Body));
@@ -120,6 +119,7 @@ module.exports = {
         //User Amount Rank
         context.textAlign = 'right';
         context.font = '10px CookieRun';
+        context.fillStyle = storedRankItem.itemList.background[storedUser.profileSource.background].fillStyle;
         const storedUserRank = await client.getRank(target.id, interaction.guild.id);
         context.fillText(`${String(storedUserRank.rank)}위`, 180, 97)
         context.strokeStyle = "#717070";
@@ -130,7 +130,7 @@ module.exports = {
         context.textAlign = 'left';
         context.font = '10px CookieRun';
         context.fillText(priceAdjust.priceCommas(storedUser.balance), 195, 97)
-        context.fillStyle = '#000000';
+        context.fillStyle = storedRankItem.itemList.background[storedUser.profileSource.background].fillStyle;
         context.strokeStyle = "#717070";
         context.lineWidth = 0.5;
         context.strokeText(priceAdjust.priceCommas(storedUser.balance), 195, 97);
@@ -140,7 +140,7 @@ module.exports = {
         context.textAlign = 'center';
         context.font = '12px CookieRun';
         context.fillText(`LV`, 44, 138)
-        context.fillStyle = '#000000';
+        context.fillStyle = storedRankItem.itemList.background[storedUser.profileSource.background].fillStyle;
         context.strokeStyle = "#717070";
         context.lineWidth = 0.5;
         context.strokeText(`LV`, 44, 138);
@@ -149,7 +149,7 @@ module.exports = {
         context.textAlign = 'center';
         context.font = '23px CookieRun';
         context.fillText(String(storedUser.exp.voiceLevel), 43, 160)
-        context.fillStyle = '#000000';
+        context.fillStyle = storedRankItem.itemList.background[storedUser.profileSource.background].fillStyle;
         context.strokeStyle = "#717070";
         context.lineWidth = 0.5;
         context.strokeText(String(storedUser.exp.voiceLevel), 43, 160);

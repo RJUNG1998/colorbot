@@ -21,21 +21,26 @@ module.exports = {
         const embeds = new Embeds();
         const target = interaction.options.getUser('대상');
         const amount = interaction.options.getInteger('금액');
+        const me = interaction.user.id
 
         const storedUser = await client.fetchUser(interaction.user.id, interaction.guild.id);
         const storedTargetUser = await client.fetchUser(target.id, interaction.guild.id);
     
         if (storedUser.balance >= amount) {
-            await User.findOneAndUpdate(
-                { _id: storedUser._id },
-                { balance: await storedUser.balance - amount }
-            );
-            await User.findOneAndUpdate(
-                { _id: storedTargetUser._id },
-                { balance: await storedTargetUser.balance + amount }
-            );
-
-            return interaction.reply({ embeds: [embeds.sendMoneySuccess(storedTargetUser.userId, amount)] });
+            if (target.id === me) {
+                return interaction.reply({ embeds: [embeds.sendMoneyToMe()] })
+            } else {
+                await User.findOneAndUpdate(
+                    { _id: storedUser._id },
+                    { balance: await storedUser.balance - amount }
+                );
+                await User.findOneAndUpdate(
+                    { _id: storedTargetUser._id },
+                    { balance: await storedTargetUser.balance + amount }
+                );
+    
+                return interaction.reply({ embeds: [embeds.sendMoneySuccess(storedTargetUser.userId, amount)] });
+            }
         } else {
             return interaction.reply({ embeds: [embeds.sendMoneyFail()] });
         }

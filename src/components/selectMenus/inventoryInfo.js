@@ -6,9 +6,12 @@ const User = require('../../schemas/user');
 
 module.exports = {
     data: {
-        name: 'inventory'
+        name: 'inventoryInfo'
     },
     async execute(interaction, client) {
+
+        const embeds = new Embeds()
+
         if (interaction.message.interaction.user.id !== interaction.user.id) {
             await interaction.reply("자기꺼만 쓰세연 예?")
         } else {
@@ -22,13 +25,17 @@ module.exports = {
                     );
                     break;
                 case "achievement":
+                    await User.findOneAndUpdate(
+                        { _id: storedUser._id },
+                        { 'profileSource.achievement': interaction.values[0].split(' ')[1] }
+                    );
                     break;
                 case "hiddenitem":
                     break;
                 default:
                     break;
             }
-            await interaction.reply({ content: "성공적으로 바꼈습니다.", ephemeral: true })
+            await interaction.reply({ embeds: [embeds.changedSuccessfulEmbed()], ephemeral: true })
         }
     }
 }

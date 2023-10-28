@@ -24,19 +24,20 @@ const userSchema = new Schema({
     },
     guildName: { type: String, default: null },
     profileSource: {
-        background: { type: String, default: 'background_gray' },
-        backgroundInventory: { type: Array, default: ['background_gray'] },
+        background: { type: String, default: 'gray' },
+        backgroundInventory: { type: Array, default: ['gray'] },
         profileBorderFilterInventory: { type: Array, default: [] },
         achievementInventory: { type: Array, default: ['beginner'] },
-        profileBorder: { type: String, default: 'profile_border_gray' },
-        profileNameBar: { type: String, default: 'profile_name_bar_gray' },
+        profileBorder: { type: String, default: 'gray' },
+        profileNameBar: { type: String, default: 'gray' },
         achievement: { type: String, default: 'beginner' },
         hiddenitem: { type: String, default: '' },
         hiddenitemInventory: { type: Array, default: [] },
         profileBorderFilter: { type: String, default: null },
+    },
+    items: {
+        enhanceInventory: { type: Array, default: [] }
     }
-
-
 });
 
 module.exports = model("User", userSchema, "users");
