@@ -1,3 +1,4 @@
+const { DiscordjsErrorCodes } = require('discord.js')
 const { EmbedBuilder } = require('discord.js')
 const User = require('../src/schemas/user')
 
