@@ -35,6 +35,10 @@ module.exports = {
             allow: [PermissionsBitField.Flags.ViewChannel]
           },
           {
+            id: newState.guild.roles.cache.get("1052025464899772456"), // 손님
+            allow: [PermissionsBitField.Flags.ViewChannel]
+          },
+          {
             id: newState.guild.roles.cache.get("1087251326171349092"), // 그레이
             allow: [PermissionsBitField.Flags.ViewChannel]
           },
