@@ -15,6 +15,12 @@ module.exports = {
     const joinChannelId5 = '996186899360268348'; // 잠수방 ID
     const joinChannelId6 = '1113291395264950322'; // 스테이지 ID
 
+    const jchannel1 = '1168708629348761600';
+    const jchannel2 = '1168709354808148018';
+    const jchannel3 = '1168709535423283361';
+    const jchannel4 = '1168723969197736066';
+    const jchannel5 = '1168709773290655855';
+
     //newState.member.nickname <- 본인의 닉네임 추출
     if (newState.channelId === joinChannelId) {
       const voiceChannel = await newState.guild.channels.create({
@@ -183,7 +189,17 @@ module.exports = {
         // client.createdVoiceChannels.set(voiceChannel3.id, voiceChannel3);
       }
 
-    if (oldState.channelId && oldState.channel.members.size === 0 && oldState.channelId !== joinChannelId && oldState.channelId !== joinChannelId2 && oldState.channelId !== joinChannelId3 && oldState.channelId !== joinChannelId4 && oldState.channelId !== joinChannelId5 && oldState.channelId !== joinChannelId6) {
+    if (oldState.channelId && oldState.channel.members.size === 0 && oldState.channelId !== joinChannelId && 
+      oldState.channelId !== joinChannelId2 && 
+      oldState.channelId !== joinChannelId3 && 
+      oldState.channelId !== joinChannelId4 && 
+      oldState.channelId !== joinChannelId5 && 
+      oldState.channelId !== joinChannelId6 &&
+      oldState.channelId !== jchannel1 &&
+      oldState.channelId !== jchannel2 &&
+      oldState.channelId !== jchannel3 &&
+      oldState.channelId !== jchannel4 &&
+      oldState.channelId !== jchannel5) {
       const voiceChannel = await oldState.guild.channels.fetch(oldState.channelId).catch(console.error);
       if (voiceChannel && voiceChannel.members.size === 0 ) {
 
