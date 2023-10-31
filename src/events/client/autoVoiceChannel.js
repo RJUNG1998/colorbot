@@ -13,7 +13,7 @@ module.exports = {
     const joinChannelId3 = '1099656691332681738'; //🗣：공부 음성채널 생성 ID
     const joinChannelId4 = '953753557499273286'; // 회의실 ID
     const joinChannelId5 = '996186899360268348'; // 잠수방 ID
-    const joinChannelId6 = '1113291395264950322'; // 스테이지 ID
+    const joinChannelId6 = '1167969719916171304'; // 스테이지 ID
 
     const jchannel1 = '1168708629348761600';
     const jchannel2 = '1168709354808148018';
@@ -38,6 +38,14 @@ module.exports = {
           },
           {
             id: newState.guild.roles.cache.get("984711293833478164"), // 부계
+            allow: [PermissionsBitField.Flags.ViewChannel]
+          },
+          {
+            id: newState.guild.roles.cache.get("1167906556281634846"), // 임시권한
+            allow: [PermissionsBitField.Flags.ViewChannel]
+          },
+          {
+            id: newState.guild.roles.cache.get("1052025464899772456"), // 손님
             allow: [PermissionsBitField.Flags.ViewChannel]
           },
           {
